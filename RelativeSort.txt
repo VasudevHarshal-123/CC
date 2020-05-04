@@ -1,0 +1,75 @@
+Given two arrays A1[] and A2[] of size N and M respectively. The task is to sort A1 in such a way that the relative order among the elements
+will be same as those in A2. For the elements not present in A2, append them at last in sorted order. It is also given that the number of elements
+in A2[] are smaller than or equal to number of elements in A1[] and A2[] has all distinct elements.
+Note: Expected time complexity is O(N log(N))
+
+Approach: Index the element. Then loop the second array and print all elemnt occurence in 1st array then iterate the indexed array from 1 to 10^6 where 
+frequency>0;
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N,M  ≤ 106
+1 ≤ A1[], A2[] <= 106
+
+Example:
+Input:
+2
+11 4
+2 1 2 5 7 1 9 3 6 8 8
+2 1 8 3
+8 4
+2 6 7 5 2 6 8 4 
+2 6 4 5
+Output:
+2 2 1 1 8 8 3 5 6 7 9
+2 2 6 6 4 5 7 8
+
+
+
+
+#include <bits/stdc++.h>
+#define ll unsigned long long int
+using namespace std;
+
+int main() {
+	
+	ll test,first,second,input;
+	ll arr[1000001];
+	memset(arr,0,sizeof(arr));
+	cin>>test;
+	
+	while(test--){
+	    cin>>first>>second;
+	    
+	    vector<ll>vect1,vect2;
+	    
+	    for(int i=0;i<first;i++){
+	        cin>>input;
+	        arr[input]++;
+	        vect1.push_back(input);
+	    }
+	    for(int i=0;i<second;i++){
+	        cin>>input;
+	        vect2.push_back(input);
+	    }
+	    
+	    
+	    for(int i=0;i<second;i++){
+	        while(arr[vect2[i]]!=0){
+	            cout<<vect2[i]<<" ";
+	            arr[vect2[i]]--;
+	        }
+	    }
+	    for(ll j=0;j<1000001;j++){
+	        
+	        if(arr[j]!=0){
+	            while(arr[j]!=0){
+	            cout<<j<<" ";
+	            arr[j]--;
+	            }    	            
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
