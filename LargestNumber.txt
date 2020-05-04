@@ -1,0 +1,66 @@
+Given a list of non negative integers, arrange them in such a manner that they form the largest number possible.
+The result is going to be very large, hence return the result in the form of a string.
+
+Lesson: 
+	1)cannot do greater<char> when dealing with array of string use greater<string>.
+	2)cannot do array.push_back(str); 
+	  Do arr[i]=str;
+
+Approach:Take input as string and sort lexical(Lexicographical)order. 
+But 3 30 34 5 9 will be sorted as 9534303 but we want 9534330.
+So,we use lambda where we return a+b>b+a. i.e 303>330 so it will take 330.  
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 102
+0 ≤ A[i] ≤ 103
+
+Example:
+Input:
+2
+5
+3 30 34 5 9
+4
+54 546 548 60
+
+Output:
+9534330
+6054854654
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	ll test;
+	cin>>test;
+	
+	while(test--){
+	    ll size;
+	    string input;
+	    string output;
+	    cin>>size;
+	    
+	    string VS[size];
+	    
+	    for(int i=0;i<size;i++){
+	        cin>>input;
+	        VS[i]=input;
+	    }
+	  
+	    
+	    sort(VS,VS+size,[](string &a, string &b)
+	    {
+	        return a+b>b+a;
+	    });
+	    
+	    for(int i=0;i<size;i++){
+	        output+=VS[i];
+	    }
+	    cout<<output<<endl;
+	    
+	    
+	}
+	return 0;
+}
