@@ -1,0 +1,6 @@
+integrate alexa with aws lambda.
+Alexa is open source.
+aws educate account.
+elastic search
+alexa skills
+use keywords triggerwords."show"me my coupons

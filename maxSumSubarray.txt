@@ -1,0 +1,64 @@
+Max Sum Subarray of size K
+Given an array of integers and a number K. 
+Write a program to find the maximum sum of a subarray of size K.
+
+Approach:Sliding window, First run a loop to calculate sum of 1st k elements.
+	 Then,Subtract the last element which is off the window and add the next element.
+Time Complexity:O(n); 
+	 	
+Constraints:
+1<=T<=100
+1<=N<=105
+1<=K<=N
+
+Example:
+Input:
+2
+4 2
+100 200 300 400
+9 4
+1 4 2 10 23 3 1 0 20
+Output:
+700
+39
+
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	ll test;
+	cin>>test;
+	while(test--){
+	    ll size,window,input,maximum,sum=0;
+	    cin>>size>>window;
+	    vector<int>V;
+	    
+	    for(int i=0;i<size;i++){
+	        cin>>input;
+	        V.push_back(input);
+	    }
+	    maximum=sum;
+	    
+	    for(int i=0;i<window;i++){
+	        sum+=V[i];
+	    }
+	    maximum=sum;
+
+	    for(int i=1;i<size;i++){
+	        
+	        if(i+window<=size){
+	            sum-=V[i-1];
+	            sum+=V[i+window-1];
+	        }
+	        
+	        if(maximum<sum){
+	            maximum=sum;
+	        }
+	    }
+	    cout<<maximum<<endl;
+	}
+	return 0;
+}
