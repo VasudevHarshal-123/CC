@@ -1,0 +1,61 @@
+Given an unsorted array A of size N of non-negative integers, find a continuous sub-array which adds to a given number S.
+
+Approach:Starting from 1st element and keep on adding until you cross the given sum the remove the last value of the window.
+	 When = break;
+Lesson:was using for(int i=1;i<=size;i++) which was not checking wheather end exceeded size. so, RDM suggested while(end<=size)
+Time:O(n); 
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 107
+1 <= Ai <= 1010
+
+Example:
+Input:
+2
+5 12
+1 2 3 7 5
+10 15
+1 2 3 4 5 6 7 8 9 10
+Output:
+2 4
+1 5
+
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main() {
+	ll test;
+	cin>>test;
+	
+	while(test--){
+	    ll size,sum,sum1,input,start=1,end=1,found=1;
+	    cin>>size>>sum;
+	    
+	    vector<ll>V;
+	    V.push_back(0);
+	    for(int i=1;i<=size;i++){
+	        cin>>input;
+	        V.push_back(input);
+	    }
+	    sum1=V[start];
+	    while(end<=size){
+	         if(sum1<sum){
+	            sum1+=V[++end];
+	        }
+	         if(sum1>sum){
+	            sum1-=V[start++];
+	        }
+	        if(sum1==sum){
+	            cout<<start<<" "<<end<<endl;
+	            found=0;
+	            break;
+	        }
+	    }
+	    if(found){
+	        cout<<-1<<endl;
+	    }
+	}
+	return 0;
+}
