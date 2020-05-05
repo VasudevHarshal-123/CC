@@ -1,0 +1,55 @@
+Sort an array of 0s, 1s and 2s
+Given an array A of size N containing 0s, 1s, and 2s; you need to sort the array in ascending order.
+Approach: Indexing+manual printing.
+Constraints:
+1 <= T <= 500
+1 <= N <= 106
+0 <= Ai <= 2
+
+Example:
+Input :
+2
+5
+0 2 1 2 0
+3
+0 1 0
+
+Output:
+0 0 1 2 2
+0 0 1
+
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+int main() {
+	ll test;
+	cin>>test;
+	
+	while(test--){
+	    ll arr[3],input;
+	    memset(arr,0,sizeof(arr));
+	    
+	    ll size;
+	    cin>>size;
+	    
+	    for(int i=0;i<size;i++){
+	        cin>>input;
+	        arr[input]++;
+	    }
+	    for(int i=0;i<arr[0];i++){
+	        cout<<0<<" ";
+	    }
+	    for(int i=0;i<arr[1];i++){
+	        cout<<1<<" ";
+	    }
+	    for(int i=0;i<arr[2];i++){
+	        cout<<2<<" ";
+	    }
+	    cout<<endl;
+	    
+	}
+	
+	return 0;
+}
