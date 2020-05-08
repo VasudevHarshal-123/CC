@@ -1,0 +1,47 @@
+Student of the Year
+Given a vector containing name of N student (in lowercase letters) and their marks in an exam.
+The task is to sort the students with respect to their marks (student with highest marks will be on top). 
+If marks are same, consider lexicographic sorting for names.
+
+Approach:STL sort with lambda. 
+Lesson: In vector of pairs we pass only pair part in lamda function. 
+Time:O(nlogn);
+Constraints:
+1 <= T <= 100
+1 <= N <= 106
+1 <= marks <= 106
+
+Example:
+Input:
+1
+4
+michal 56
+john 100
+abbas 98
+jordan 45
+
+Output:
+john 100
+abbas 98
+michal 56
+jordan 45
+
+
+
+code:
+vector<pair<string, int>> sortMarks(vector<pair<string, int>> v, int N){
+    
+    sort(v.begin(),v.end(),[](pair<string, int>a,pair<string, int>b){
+          if(a.second>b.second)
+            return true;
+          if(a.second<b.second)
+            return false;
+          if(a.second==b.second){
+              if(a.first<b.first)
+                return true;
+                return false;
+          }    
+    });
+    return v;
+    
+}
