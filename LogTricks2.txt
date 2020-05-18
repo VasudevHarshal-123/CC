@@ -1,0 +1,52 @@
+Check if a Integer is power of 8 or not
+
+Given a positive integer N, The task is to find if it is a power of eight or not.
+
+Approach: Since c++ doesn't have an inbuild log8 fxn using log base change formula:
+Logarithm base change rule   logb(x) = logc(x) / logc(b)
+
+Constraints:
+1<=T<=100
+1<=N<=1018
+
+Example:
+Input:
+2
+64
+75
+Output:
+Yes
+No
+
+#include <bits/stdc++.h>
+#define ul unsigned long long int 
+using namespace std;
+
+int main() {
+	
+	ul test;
+	cin>>test;
+	
+	while(test--){
+	    ul value;
+	    cin>>value;
+	    double output = (double)(log2(value)/log2(8));
+	    
+	    if(value!=0){
+	        
+	    if(ceil(output)==floor(output)){
+	        cout<<"Yes"<<endl;
+	    }
+	    else{
+	        cout<<"No"<<endl;
+	    }
+	    }
+	    else{
+	        cout<<"No"<<endl;
+	    }
+	    
+	}
+	
+	
+	return 0;
+}
