@@ -3,6 +3,9 @@ Logarithm Tricks:https://www.geeksforgeeks.org/logarithm-tricks-for-competitive-
 1)Power of Two:
 Given a positive integer N. The task is to check if N is a power of 2. That is N is 2x for some x.
 
+Logarithm base switch rule   logb(c) = 1 / logc(b)
+Logarithm base change rule   logb(x) = logc(x) / logc(b)
+
 Constraints:
 1 <= T <= 100
 0 <= N <= 1018
@@ -53,3 +56,4 @@ int main() {
     }	
 	return 0;
 }
+
