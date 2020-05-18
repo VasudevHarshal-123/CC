@@ -1,0 +1,55 @@
+Logarithm Tricks:https://www.geeksforgeeks.org/logarithm-tricks-for-competitive-programming/
+
+1)Power of Two:
+Given a positive integer N. The task is to check if N is a power of 2. That is N is 2x for some x.
+
+Constraints:
+1 <= T <= 100
+0 <= N <= 1018
+
+Example:
+Input :
+2
+1
+98
+
+Output :
+YES
+NO
+
+Approach:logb (x) = y => x=b^y;
+
+Code:
+#include <bits/stdc++.h>
+#define ll unsigned long long int
+using namespace std;
+
+ll Power(ll n){
+    if(ceil(log2(n))==floor(log2(n))){
+        return true;
+    }
+    return false;
+}
+
+int main() {
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll value;
+        cin>>value;
+    if(value!=0){
+        if(Power(value)){
+            cout<<"YES"<<endl;
+        }
+        else{
+            cout<<"NO"<<endl;
+        }
+    }
+    else{
+        cout<<"NO"<<endl;
+    }           
+    }	
+	return 0;
+}
