@@ -1,0 +1,52 @@
+Prime At Prime Index
+Given a vector V of n elements. Return the vector containing prime numbers that are at prime index(1-indexing).
+
+Constraints:
+1 <= T <= 10
+1 <= n <= 105
+1 <= Vi <= 105
+
+Example:
+Inuput:
+1
+5
+3 5 2 4 8
+Output:
+5 2
+
+Approach:Call by value for both index and value;
+
+LEARN:Shorter way to calculate prime number;
+
+bool prime(int v){
+    
+    if(v<=1){
+        return false;
+    }
+    
+    if(v<=3){
+        return true;
+    }
+    
+    if(v%2==0 || v%3==0){
+        return false;
+    }
+    for(int i=5;i*i<=v;i+=6){
+        if(v%i==0||v%(i+2)==0){
+            return false;
+        }
+    }
+    return true;
+    
+}
+
+vector<int> prime_at_prime(vector<int>v)
+{
+    vector<int>output;
+    for(int i=0;i<v.size();i++){
+        if(prime(v[i])&&prime(i+1)){
+            output.push_back(v[i]);
+        }
+    }
+    return output;
+}
