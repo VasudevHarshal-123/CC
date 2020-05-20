@@ -1,0 +1,59 @@
+To find the power of K greater than equal to and less than equal to N:
+Given two integers N and K, the task is to find the power of K greater than equal to and less than equal to N.
+
+Approach:K^x>N and K^x<N.
+Take log:
+xlog_k(K)>log_k(N);
+x>log_k(N)
+use ceil of >
+x = ceil(log_k(N));
+Base Change;
+x = ceil(log_2(N)/log_2(K));
+ 
+CODE:
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+ {
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int N,K,small,greater;
+        cin>>N>>K;
+        
+        //Test cases: 
+            //k=1 it will never cross the value;
+            //N<K means 1 and K is output;
+        
+        if(K==1 &&N==1){
+            cout<<1<<" "<<1<<endl;
+            continue;
+        }    
+        
+        if(K==1 &&N!=1){
+            cout<<1<<" "<<-1<<endl;
+            continue;
+        }    
+        
+        if(N<K){
+            cout<<1<<" "<<K<<endl;
+            continue;
+        }
+        
+        
+        small=floor(log2(N)/log2(K));
+        greater = ceil(log2(N)/log2(K));
+        
+        small=(int)small;
+        greater=(int)greater;
+        
+        cout<<pow(K,small)<<" "<<pow(K,greater)<<endl;
+        
+        
+    }    
+return 0;
+}
