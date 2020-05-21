@@ -1,0 +1,28 @@
+Find Nth root of M
+You are given 2 numbers (N , M); the task is to find N√M (Nth root of M).
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	ll test;
+	cin>>test;
+	
+	while(test--){
+	  ll N,M;
+	  cin>>N>>M;
+	  double value = pow(N,(1/N)*(log2(M)/log2(N)));
+	  int value2 = (int)value;
+	  
+	  if(value==value2){
+	      cout<<value2<<endl;
+	  }
+	  else{
+	      cout<<-1<<endl;
+	  }
+	  
+	}
+	
+	return 0;
+}
