@@ -1,0 +1,64 @@
+Kth smallest element
+Given an array arr[] and a number K where K is smaller than size of array, the task is to find the Kth smallest element in the given array. It is given that all array elements are distinct.
+
+Approach:Using indexing and linear search; But there were repeated values hence another if.
+
+Time Complexity: O(n);
+Constraints:
+1 <= T <= 100
+1 <= N <= 105
+1 <= arr[i] <= 105
+1 <= K <= N
+
+Example:
+Input:
+2
+6
+7 10 4 3 20 15
+3
+5
+7 10 4 20 15
+4
+Output:
+7
+15
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	
+	int test;
+	cin>>test;
+	
+	while(test--){
+	    int size,input,k;
+	    cin>>size;
+	    vector<int> vect(100001);
+	   
+	    
+	    for(int i=0;i<size;i++){
+	        cin>>input;
+	        vect[input]++;
+	    }
+	    cin>>k;
+	    for(int i=0;i<100001;i++){
+	        if(vect[i]>0){
+	            k--;
+	        }
+	        
+	        if(vect[i]>1){
+	            for(int j=1;j<vect[i];j++){
+	                k--;
+	            }
+	        }
+	        if(k<=0){
+	            cout<<i<<endl;
+	            break;
+	        }
+	    }
+	    
+	}
+	
+	return 0;
+}
