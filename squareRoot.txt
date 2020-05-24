@@ -1,4 +1,31 @@
+Square root
+Given an integer x. The task is to find the square root of x. If x is not a perfect square, then return floor(√x).
+
+Constraints:
+1 ≤ T ≤ 10000
+1 ≤ x ≤ 107
+
+Example:
+Input:
+2
+5
+4
+Output:
+2
+2
+
+n(1/2) = d 
+     apply log2 on both sides
+      log2(n(1/2)) = log2(d)
+      log2(d) = 1/2 * log2(n)
+      d = 2(1/2 * log2(n)) 
+      d = pow(2, 0.5*log2(n))
+
 long long int floorSqrt(long long int x) 
 {
     return (int)floor(sqrt(x));
+    
+	//OR using log
+
+    return pow(2, 0.5*log2(n));		
 }
