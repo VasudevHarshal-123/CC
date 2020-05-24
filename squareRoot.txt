@@ -1,0 +1,4 @@
+long long int floorSqrt(long long int x) 
+{
+    return (int)floor(sqrt(x));
+}
