@@ -1,0 +1,87 @@
+Trapping Rain Water
+Given an array arr[] of N non-negative integers representing height of blocks at index i as Ai where the width of each block is 1.
+Compute how much water can be trapped in between blocks after raining.
+
+Approach:The maximum water a postn can store will be minimum of blocks on its left or right only if they are less than the current position.
+Assign a leftMax and rightMax value to each postn then check for above condition. Also, left most and right most wont hold any water.
+
+Time:O(n)
+
+Constraints:
+1 <= T <= 100
+3 <= N <= 107
+0 <= Ai <= 108
+
+Example:
+Input:
+2
+4
+7 4 0 9
+3
+6 9 9
+
+Output:
+10
+0
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,lMax,rMax,output=0;
+        vector<ll>vect;
+        vector<ll>leftMax,rightMax; 
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            vect.push_back(input);
+        }
+        vector<ll>::iterator left=vect.begin(),right=vect.end();
+        
+        leftMax.push_back(*left);
+        rightMax.push_back(*right);
+        
+        ++left;
+        --right;
+        
+        lMax=vect.front();
+        rMax=vect.back();
+        
+        while(left!=vect.end()&&right!=vect.begin()){
+            if(lMax>(*left)){
+                leftMax.push_back(lMax);
+            }    
+            else{
+                lMax=*left;
+                leftMax.push_back(lMax);
+            }
+            if(rMax>(*right)){
+                rightMax.push_back(rMax);
+            }
+            else{
+                rMax=*right;
+                rightMax.push_back(rMax);
+            }
+            left++;
+            right--;
+        }
+        reverse(rightMax.begin(),rightMax.end());
+        for(int i=1;i<size-1;i++){
+            output+=(min(leftMax[i],rightMax[i])-vect[i])>0?(min(leftMax[i],rightMax[i])-vect[i]):0;
+        }
+         
+         cout<<output<<endl;
+    }
+
+	return 0;
+}
