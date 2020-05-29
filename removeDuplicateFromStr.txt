@@ -1,0 +1,78 @@
+Remove all duplicates from a given string:https://practice.geeksforgeeks.org/problems/remove-all-duplicates-from-a-given-string/0
+Given a string which may contains lowercase and uppercase chracters. The task is to remove all  duplicate characters from the string and print the resultant string.
+The order of remaining characters in the output should be same as in the original string.
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 100
+
+Example:
+Input:
+2
+geeksforgeeks
+HappyNewYear
+
+Output:
+geksfor
+HapyNewYr
+
+Approach:Take three array for lowerCase upperCase and numbers respectively. Do indexing to insert and make index 0 when it occurs the 1st time.
+
+Application of islower(), isupper(), tolower(), toupper() function.
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        string s1,s2="";
+        ll lowerArr[26],upperArr[26],numberArr[10],val;
+        
+        memset(upperArr,0,sizeof(upperArr));
+        
+        memset(lowerArr,0,sizeof(lowerArr));
+        
+        memset(numberArr,0,sizeof(numberArr));
+        
+        cin>>s1;
+        for(int i=0;i<s1.length();i++){
+            if((int)s1[i]<=57&&(int)s1[i]>=48){
+                numberArr[((int)s1[i])-48]++;
+            
+            }
+            else if(islower(s1[i])){
+                lowerArr[((int)s1[i])-97]++;
+            }
+            else{
+                upperArr[((int)s1[i])-65]++;
+            }
+        }
+        for(int i=0;i<s1.length();i++){
+            if((int)s1[i]<=57&&(int)s1[i]>=48&&numberArr[(int)s1[i]-48]!=0){
+                s2+=s1[i];
+                numberArr[((int)s1[i])-48]=0;
+            }
+            else if((islower(s1[i])&&lowerArr[(int)s1[i]-97])!=0){
+                s2+=s1[i];
+                lowerArr[((int)s1[i])-97]=0;
+            }
+            else if((isupper(s1[i])&&upperArr[(int)s1[i]-65])!=0){
+                s2+=s1[i];
+                upperArr[((int)s1[i])-65]=0;
+            }
+        }
+        cout<<s2<<endl;
+    }
+
+	return 0;
+}
