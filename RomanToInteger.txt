@@ -1,0 +1,71 @@
+Roman Number to Integer:
+Given an string in roman no format (s)  your task is to convert it to integer .
+Constraints:
+1<=T<=100
+1<=roman no range<4000
+
+Example:
+Input
+2
+V
+III 
+Output
+5
+3
+
+Approach: Move from right to left keep on ondding unless the number infront is less than the 
+heighest number in right; eg: L=50  XL=40 LXX=60
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int roman(char s){
+    switch(s){
+        case 'I': return 1;
+        
+        case 'V': return 5;
+        
+        case 'X': return 10;
+        
+        case 'L': return 50;
+        
+        case 'C': return 100;
+        
+        case 'D': return 500;
+        
+        case 'M': return 1000;
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        string input;
+        ll sum=0,max=0;
+        cin>>input;
+        
+        for(int i=input.length()-1;i>=0;i--){
+            int rom =roman(input[i]);
+            if(max<rom){
+                max=rom;
+            }
+            if(rom<max){
+                sum-=rom;
+            }
+            else{
+                sum+=rom;
+            }
+        }
+        cout<<sum<<endl;
+    }
+
+	return 0;
+}
