@@ -1,0 +1,37 @@
+Removing consecutive duplicates
+Stacks can be used to remove duplicate characters from a string that are stacked next to each other. For example, we take the string aabbccccc and convert it into abc.
+We can push the first character into a stack and skip if the top of the stack is equal to current character.You are given a string str.
+You need to remove the consecutive duplicates.
+
+Approach:check if stacks top is not equal to string current element.
+
+Constraints:
+1 <= T <= 100
+1 <= |str| <= 103
+
+Examples:
+Input:
+2
+aaaaaabaabccccccc
+abbccbcd
+Output:
+ababc
+abcbcd
+
+CODE:
+string removeConsecutiveDuplicates(string s)
+{
+    stack<char>st;
+    st.push(s[0]);
+    string output="";
+    for(int i=1;i<s.length();i++){
+        if(st.top()!=s[i])
+            st.push(s[i]);
+    }
+    while(st.empty()==false){
+        output+=st.top();
+        st.pop();
+    }
+    reverse(output.begin(),output.end());
+    return output;
+}
