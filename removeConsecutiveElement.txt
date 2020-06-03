@@ -1,0 +1,44 @@
+Removing Consecutive Elements
+Given a vector V of  N elements and two special numbers x and y. Remove all consecutive same special elements. 
+The final vector should be free from any consecutive same special elements.
+Note: The final vector may be empty.
+
+Constraints:
+1 <= T <=10
+1 <= N <= 105
+1 <= Vi <= 105
+1 <= x, y <= 105
+
+Example:
+Input:
+1
+6
+2 1 2 2 1 5
+1 2
+Output:
+2 5
+
+Explanation:
+Testcase1: x = 1 and y = 2. Now, we traverse the vector from left to right and remove all consecutive 1s and 2s.
+First we remove 2 1 2 2 1 5. Now we are left with 2 1 1 5. Next we remove 1s: 2 1 1 5. We are left with 2 5.
+
+CODE:
+vector<int> remove_special_consecutive(vector<int>s,int x,int y)
+{
+    stack<int>st;
+    st.push(s[0]);
+    vector<int>output;
+    for(int i=1;i<s.size();i++){
+        if((s[i]!=x && s[i]!=y) || st.top()!=s[i] )
+            st.push(s[i]);
+        else if(st.top()==s[i] && (s[i]==x || s[i]==y)){
+            st.pop();
+        }
+    }
+    while(st.empty()==false){
+        output.push_back(st.top());
+        st.pop();
+    }
+    reverse(output.begin(),output.end());
+    return output;
+}
