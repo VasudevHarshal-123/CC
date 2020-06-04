@@ -1,0 +1,84 @@
+Maximum of all subarrays of size k
+Given an array A and an integer K. Find the maximum for each and every contiguous subarray of size K.
+
+Approach:1)Loop over the window hardcode. Find max print store.
+	 2)Now push the next element to window.
+	 3)If the element in front is max means we will have to iterate window to find max.
+	 4)If the new element entring is > max then it will become max;
+	 5)Else just simply pop 1st element of window as max is not being popped.  
+	 6)max=INT_MIN; to deal in case elements are -ve;
+Constraints:
+1 ≤ T ≤ 200
+1 ≤ N ≤ 107
+1 ≤ K ≤ N
+0 ≤ A[i] <= 107
+
+Example:
+Input:
+2
+9 3
+1 2 3 1 4 5 2 3 6
+10 4
+8 5 10 7 9 4 15 12 90 13
+
+Output:
+3 3 4 5 5 5 6
+10 10 10 15 15 90 90
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,window,input,max=INT_MIN;
+        vector<int>arr;
+        
+        cin>>size>>window;
+        deque<int>dq;
+        for(int i=0;i<size;i++){
+            cin>>input;
+            arr.push_back(input);
+        }
+        
+        for(int i=0;i<window;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+            dq.push_back(arr[i]);
+        }
+        cout<<max<<" ";
+        
+        for(int i=window;i<size;i++){
+            dq.push_back(arr[i]);
+            if(dq.front()==max){
+                dq.pop_front();
+                max=INT_MIN;
+                for(int j=i-window+1;j<=i;j++){
+                    if(arr[j]>max){
+                        max=arr[j];
+                    }
+                }
+            }
+            else if(dq.back()>=max){
+                max=dq.back();
+                dq.pop_front();
+            }
+            else{
+                dq.pop_front();
+            }
+            cout<<max<<" ";
+        }
+        cout<<endl;
+      }
+    
+	return 0;
+}
