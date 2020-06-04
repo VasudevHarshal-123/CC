@@ -1,0 +1,39 @@
+Generate Binary Numbers
+Given a number N. The task is to generate and print all binary numbers with decimal values from 1 to N.
+
+Approach: There is a pattern in binary numbers every value is concatenated with a 0 and 1 
+	  eg: 1 1+0(10) 1+1(11) 10+0(100) 10+1(101) and so on.
+Use of queue for this approach.
+
+LEARN: Insert string in vector
+
+Constraints:
+1 ≤ T ≤ 106
+1 ≤ N ≤ 106
+
+Example:
+Input:
+2
+2
+5
+Output:
+1 10
+1 10 11 100 101
+
+vector<string> generate(ll n)
+{
+	queue<string>q;
+	vector<string>v;
+	q.push("1");
+	v.push_back("1");
+	
+	
+	for(int i=1;i<n;i++){
+	    q.push(q.front()+'0');
+	    q.push(q.front()+'1');
+	    q.pop();
+	    auto it=v.begin()+i;
+	    v.insert(it,q.front());
+	}
+	return v;
+}
