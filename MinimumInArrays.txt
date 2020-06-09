@@ -1,0 +1,94 @@
+Minimums in Array 
+You are given two arrays A and B each containing N numbers. 
+You need to choose exactly one number from A and exactly one number from B such that the index of the two chosen numbers is not same 
+and the sum of the 2 chosen values is minimum. Formally, if you chose ith element from A whose value is x and jth element from B whose value is y, 
+you need to minimize the value of (x+y) such that i is not equal to j.
+Your objective is to find this minimum value.
+
+Approach: The entire question revolves around the first two elements of both arrays. If Smallest index collide then the sum of diognal element which is smaller is answer
+Eg: A1= 5 4 7 9	  s1= 4 5 7 9
+    A2= 6 3 8 9   s2= 3 6 8 9	
+
+Here since 4 and 3 has index 1 we check 4+6 or 3+5 whichever is less.
+
+Constraints:
+1<=T<=30
+1<= N <=100000
+1< =Array elements < =100000
+
+Example:
+Input:
+1
+5
+5 4 3 2 1
+1 2 3 4 5
+Output:
+2
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input;
+        
+        cin>>size;
+        
+        multiset<pair<int,int>>s1;
+        multiset<pair<int,int>>s2;
+        for(int i =0;i<size;i++)
+        {
+            cin>>input;
+            pair<int,int>p;
+            p.first=input;
+            p.second=i;
+            s1.insert(p);
+        }
+        auto small1=s1.begin();
+        auto small1Next = s1.begin();
+        ++small1Next;
+        
+        
+        for(int i =0;i<size;i++)
+        {
+            pair<int,int>p;
+            cin>>input;
+            p.first=input;
+            p.second=i;
+            s2.insert(p);
+        }
+        auto small2 = s2.begin();
+        auto small2Next = s2.begin();
+        ++small2Next;
+        if(size==1){
+            cout<<-1<<endl;
+        }
+        else if((*small2).second==(*small1).second){
+            if((*small1Next).first+(*small2).first<(*small1).first+(*small2Next).first){
+               cout<<(*small1Next).first+(*small2).first<<endl; 
+            }   
+            else{
+                cout<<(*small1).first+(*small2Next).first<<endl;
+            }
+        }
+        else{
+            cout<<(*small1).first+(*small2).first<<endl;
+        }
+        
+    
+
+    }
+    
+
+	return 0;
+}
