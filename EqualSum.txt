@@ -31,7 +31,7 @@ YES
 
 
 Time-O(N);
-
+SPACE-O(2N);
 #include <bits/stdc++.h>
 #define ll long long int
 using namespace std;
@@ -46,14 +46,34 @@ int main() {
     cin>>test;
     
     while(test--){
-        ll size,input;
+        ll size,input,sum=0,found=1;
         vector<int>vect;
+        vector<int>sumLeft;
+        vector<int>sumRight;
         
         cin>>size;
         
         for(int i=0;i<size;i++){
             cin>>input;
+            sum+=input;
+            sumLeft.push_back(sum);
             vect.push_back(input);
+        }
+        sum=0;
+        for(int i=size-1;i>=0;i--){
+            sum+=vect[i];
+            sumRight.push_back(sum);
+        }
+        reverse(sumRight.begin(),sumRight.end());
+        for(int i=0;i<size;i++){
+            if(sumLeft[i]==sumRight[i]){
+                cout<<"YES"<<endl;
+                found=0;
+            }
+        }
+        
+        if(found){
+            cout<<"NO"<<endl;
         }
         
     }
