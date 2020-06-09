@@ -1,0 +1,37 @@
+Binary String
+Given a binary string S. The task is to count the number of substrings that start and end with 1. 
+For example, if the input string is “00100101”, then there are three substrings “1001”, “100101” and “101”.
+
+Approach:Number of subset formed by 1's minus number of 1's because subsets {1}{1}{1} will not affect 
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,count=0;
+        string s;
+        cin>>size;
+        cin>>s;
+        
+        for(int i=0;i<size;i++){
+            if(s[i]=='1')
+                count++;
+        }
+        
+        
+        cout<<((count*(count+1))/2)-count<<endl;
+    }
+    
+
+	return 0;
+}
