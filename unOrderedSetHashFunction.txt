@@ -1,0 +1,26 @@
+Unordered Set Hash Function 
+You are given a set and a string. You need to write the hash function and using that only return the hash value of the given string.
+
+Approach:hash_function gives the unique value to which it is mapped
+
+Constraints:
+1 <= T <= 100
+
+Example:
+Input:
+1
+FAR
+Output:
+-1651365760323248093
+
+
+long int HashMe (unordered_set<string> myset, string str){
+
+    myset.insert(str);
+    
+    unordered_set<string>::hasher fn = myset.hash_function();
+    // auto fn also works
+    
+    return fn(str); 
+
+}
