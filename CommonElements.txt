@@ -1,0 +1,49 @@
+Common Elements
+Given two vectors V1 and V2 of sizes n and m respectively. Return the list of elements common to both the vectors and return the list in sorted order. 
+Duplicates may be there in the output list.
+
+Approach: Insert !st vector in multimap as key and value as 0. Now iterate 2nd vector. There change the value if occurence of element take place to that key itself
+	  Then in a new vector store values of multimap where value!=0;
+	eg: v1= 3 4 2 2 4
+	    mm1= (2,0)(2,0)(3,0)(4,0)(4,0)
+	    v2= 3 2 2 7
+	   Now mm1= (2,2)(2,2)(3,3)(4,0)(4,0)	 
+
+Constraints:
+1 <= T <= 10
+1 <= n, m <= 105
+1 <= Vi <= 105
+
+Example:
+Input:
+1
+5
+3 4 2 2 4
+4
+3 2 2 7
+Output:
+2 2 3
+
+vector<int> common_element(vector<int>v1,vector<int>v2)
+{
+    multimap<int,int>mm1;
+    vector<int>output;
+    for(auto x:v1){
+        mm1.insert({x,0});
+    }
+    for(auto x:v2){
+        auto range = mm1.equal_range(x);
+        for(auto it=range.first;it!=range.second;it++){
+            if((*it).second==0){
+                (*it).second=x;
+                break;
+            }
+        }
+    }
+    for(auto it = mm1.begin();it!=mm1.end();++it){
+        if((*it).second!=0){
+            output.push_back((*it).first);
+        }
+    }
+    return output;
+}
