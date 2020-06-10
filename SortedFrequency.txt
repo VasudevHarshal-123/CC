@@ -1,0 +1,20 @@
+Sorted Frequency 
+You are given an array arr of size n. You need to print the distinct elements of array in sorted order(increasing) together with their frequency.
+
+Approach: Store the array in multimap then move it to map by storing count as frequency
+
+int freqSorted(int arr[], int n)
+{
+    multimap<int,int>mm;
+    map<int,int>m;
+   for(int i=0;i<n;i++){
+       mm.insert({arr[i],0});
+   }
+   for(auto x:mm){
+       m.insert({x.first,mm.count(x.first)});
+   }
+   for(auto x:m){
+       cout<<"("<<x.first<<","<<x.second<<")"<<" ";
+   }
+   
+}
