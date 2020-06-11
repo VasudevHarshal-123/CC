@@ -23,11 +23,10 @@ string electionWinner(string names[], int n)
         }
     }
     for(int i=0;i<n;i++){
-        if(max->first==names[i]){
+        if((max->first)==names[i]){
             return names[i];
         }
     }
-    return (*max).first;
 }
 
 
