@@ -1,0 +1,50 @@
+Subarray sum 
+Given a vector V of N positive elements. Find the maximum sum of the subarray that starts and ends with the same value element.
+
+Approach: keep a vector for prefix sum.Then in unoredered_map insert element if not present, if present find sum from its last occurence and save max;
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 105
+1 <= Vi <= 105
+
+Example:
+Input:
+1
+9
+4 3 1 2 4 2 5 3 6
+Output:
+20
+
+
+
+int maximum_sum(vector<int>v)
+{
+    int max=0;
+    unordered_map<int,int>umap;
+    vector<int>sum;
+    for(int i=0;i<v.size();i++){
+        if(i!=0){
+            sum.push_back(v[i]+sum[i-1]);
+        }
+        else{
+         sum.push_back(v[i]);   
+        }
+        auto it = umap.find(v[i]);
+        if(it!=umap.end()){
+            int start = (it->second);
+            if(start!=0){
+                if(sum[i]-sum[start-1]>max)
+                    max=sum[i]-sum[start-1];
+            }
+            else{
+                if(sum[i]>max)
+                max=sum[i];
+            }
+        }
+        else{
+            umap[v[i]]=i;
+        }
+    }
+    return max;
+}
