@@ -1,0 +1,52 @@
+Elected candidate 
+Given an array of names of candidates in an election. A candidate name in array represents a vote casted to the candidate. 
+You need to find the candidate with maximum votes recieved in the election.
+
+Approach: Store in unordered map and increase count;
+
+
+string electionWinner(string names[], int n)
+{
+    unordered_map<string,int>um;
+    for(int i=0;i<n;i++){
+        if(um.find(names[i])==um.end()){
+            um.insert({names[i],1});
+        }
+        else{
+            um[names[i]]++;   
+        }
+    }
+    unordered_map<string,int>::iterator max = um.begin();
+    for(auto it=um.begin();it!=um.end();it++){
+        if((*it).second>(*max).second){
+            max=it;
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(max->first==names[i]){
+            return names[i];
+        }
+    }
+    return (*max).first;
+}
+
+
+
+string electionWinner(string names[], int n) 
+    {
+        unordered_map<string,int> um;
+        for(int i = 0; i < n; ++i) {
+            um[names[i]]++; 
+            
+        } 
+        unordered_map<string,int>::iterator it = max_element(um.begin(), um.end(), 
+        [](unordered_map<string,int>::iterator &a, unordered_map<string,int>::iterator &b)
+            {
+                return a.second < b.second; 
+                
+            }); 
+            if (it != um.end()) 
+            return it->first; 
+            return ""; 
+        
+    }    
