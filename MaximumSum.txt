@@ -1,0 +1,31 @@
+Maximium Sum 
+Given a vector of size N and an integer K. You have to choose one element one by one K 
+times. You can only pick the element whose frequency is maximum. The element will be removed from the vector after being chosen. 
+If there are many elements with the maximum frequency then you can choose any. Your aim is to maximize the sum.
+
+TLE
+
+O(N*K)
+
+
+long maximum_sum(vector<int>v,int k)
+{
+   unordered_map<int,int>mp;
+   long int sum=0;
+   for(int i=0;i<v.size();i++){
+       mp[v[i]]++;
+   }
+   
+   for(int i=0;i<k;i++){
+   auto it = max_element(mp.begin(), mp.end(), [](pair<const int,int> &a,pair<const int,int> &b){
+      if((a.second)<(b.second))
+        return true;
+      else if((a.second)==(b.second))
+        return (a.first)<(b.first);
+        return false;
+   });
+   sum+=it->first;
+   mp[it->first]--;
+   }
+  return sum;
+}
