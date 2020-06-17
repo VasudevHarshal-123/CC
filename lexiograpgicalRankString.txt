@@ -1,0 +1,47 @@
+Lexicographical Rank Of String 
+You are given a string, find its rank taking all its permutations which has to be lexicographically sorted.
+
+
+Constraints:
+1 <= T <= 100
+
+Example:
+Input:
+2
+ABC
+CAB
+
+Output:
+1
+5
+
+int RankMe(string str){
+
+    int len = str.length();
+    int factorial=1;
+    int count=1;
+    for(int i=2;i<=len;i++){
+        factorial*=i;
+    }
+    string s = str;
+    sort(s.begin(),s.end());
+    // cout<<s<<endl;
+    while(s!=str){
+        ++count;
+        prev_permutation(str.begin(),str.end());
+    }
+    return count;
+}
+
+OPTIMZED CODE
+
+int RankMe(string str){
+
+    int count = 1;
+    
+    while(prev_permutation(str.begin(),str.end())){
+        count++;
+    }
+    
+    return count;
+}
