@@ -1,0 +1,70 @@
+Find all pairs with a given sum 
+Given two unsorted arrays A of size N and B of size M of distinct elements, the task is to find all pairs from both arrays whose sum is equal to X.
+
+Approach: Order of output matters(min to max), Hence 1st array is taken as set.To avoid TLE 2nd was taken as unordered_set. 
+Also look at "," So that at last there is no "," 
+
+Constraints:
+1 <= T <= 100
+1 <= N, M, X <= 106
+-106 <= A, B <= 106
+
+Example:
+Input:
+2
+5 5 9
+1 2 4 5 7
+5 6 3 4 8
+2 2 3
+0 2
+1 3
+Output:
+1 8, 4 5, 5 4
+0 3, 2 1
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size1,size2,found=1,sum,input,count=0;
+        set<int>uset1;
+        unordered_set<int>uset2;
+        
+        cin>>size1>>size2>>sum;
+        
+        for(int i=0;i<size1;i++){
+            cin>>input;
+            uset1.insert(input);
+        }
+        for(int i=0;i<size2;i++){
+            cin>>input;
+            uset2.insert(input);
+        }
+        for(auto i=uset1.begin();i!=uset1.end();++i){
+            if(uset2.find(sum-(*i))!=uset2.end()){
+                found=0;
+                if(count!=0){
+                    cout<<","<<" ";
+                }
+                cout<<*i<<" "<<sum-*i;
+                ++count;
+            }   
+        }
+        if(found)
+            cout<<-1;
+        cout<<endl;
+        
+    }
+
+	return 0;
+}
