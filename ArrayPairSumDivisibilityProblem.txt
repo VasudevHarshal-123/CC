@@ -1,0 +1,73 @@
+Array Pair Sum Divisibility Problem
+Given an array of integers and a number k, write a function that returns true if given array can be divided into pairs such that sum of every pair is divisible by k.
+
+Approach:Make a vector which holds multiple of k till 2*max(input); Then use unordered_multiset to check if n/2 pairs are available for any element of vector.
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,count=0,k,max=0,sum=0;
+        unordered_multiset<int>umset;
+        vector<int>v;
+        
+        cin>>size;
+        for(int i=0;i<size;i++){
+            cin>>input;
+            sum+=input;
+            if(input>max)
+                max=input;
+            umset.insert(input);
+        }
+        cin>>k;
+        if(size%2!=0){
+            cout<<"False"<<endl;
+            continue;
+        }
+        else if(sum%k!=0){
+            cout<<"False"<<endl;
+            continue;
+        }
+        else{
+            cout<<"True"<<endl;
+        }
+        // v.push_back(k);
+        // while(v.back()<2*max){
+        //     v.push_back(v.back()+k);
+        // }
+        
+        
+        // for(auto it= umset.begin();it!=umset.end();it++){
+        //     // cout<<(*it)<<endl;
+        //     for(int i=0;i<v.size();i++){
+        //         auto search = umset.find(v[i]-(*it));
+        //         // cout<<v[i]-(*it)<<" "<<(*it)<<" "<<i<<endl;
+        //         if(v[i]-(*it)>0 && search!=umset.end() && it!=search){
+        //             ++count;
+        //             // umset.erase(it);
+        //             // umset.erase(v[i]-(*it));
+        //             break;
+        //         }
+        //     }
+        // }
+        // if(umset.size()!=count){
+        //     cout<<"False"<<endl;
+        // }
+        // else{
+        //     cout<<"True"<<endl;
+        // }
+        
+    }
+
+	return 0;
+}
