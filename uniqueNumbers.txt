@@ -1,0 +1,49 @@
+Unique Numbers
+In given range, print all numbers having unique digits. e.g. In range 1 to 20 should print all numbers except 11.
+
+Approach: for each element from start to end check for each element if it has similar digits. temp is used cozz we have to print "i", umap initialised after for coz  
+	  for each element a new umap is needed. 
+Input:
+1
+10 20
+Output:
+10 12 13 14 15 16 17 18 19 20
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll start,end,temp,count=0;
+        
+        cin>>start>>end;
+        
+        for(int i=start;i<=end;i++){
+             unordered_map<int,int>umap;
+            count=0;
+            temp=i;
+            while(temp>0){
+                ++count;
+                umap[temp%10]++;
+                temp/=10;
+            }
+            if(umap.size()==count){
+                cout<<i<<" ";
+            }
+        }
+        cout<<endl;
+        
+    }
+
+	return 0;
+}
