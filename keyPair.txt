@@ -1,0 +1,60 @@
+Key Pair
+Given an array A of N positive integers and another number X. Determine whether or not there exist two elements in A whose sum is exactly X.
+
+Approach:use of unordered_multiset to find X-element
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 105
+1 ≤ A[i] ≤ 105
+
+Example:
+Input:
+2
+6 16
+1 4 45 6 10 8
+5 10
+1 2 4 3 6
+
+Output:
+Yes
+Yes
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,sum,found=1;
+        unordered_multiset<int>umset;
+        vector<int>vect(100001,0);
+        cin>>size>>sum;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            umset.insert(input);
+        }
+        
+        for(auto it = umset.begin();it!=umset.end();it++){
+            auto search = umset.find(sum-(*it));
+            if(search!=umset.end() && search!=it){
+                cout<<"Yes"<<endl;
+                found=0;
+                break;
+            }
+        }
+        if(found)
+            cout<<"No"<<endl;
+    }
+
+	return 0;
+}
