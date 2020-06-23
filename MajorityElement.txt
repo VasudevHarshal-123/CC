@@ -1,0 +1,91 @@
+Majority Element
+Given an array A of N elements. Find the majority element in the array.
+A majority element in an array A of size N is an element that appears more than N/2 times in the array.
+
+O(N^2): run two loops 
+
+BOYER MOORE VOTING ALGORITHM.
+FIRST LOOP: Here A[i] will hold 1st element and increase the count if that element repeats the count will increase else decrease. pre_element will only change if count==0
+means even if the 1st element is not n/2 one it will take pre_element variable. 
+int count=0;
+int pre_element;
+
+for(int i=0;i<size;i++){
+	if(count==0){
+		count=1;
+		pre_element=A[i];
+	}
+	else if(pre_element==A[i]){
+		count++;
+	}
+	else{
+		count--;
+	}
+
+}
+Then Run a second loop to check for count.
+for(int i=0;i<size;i++){
+	if(A[i]==pre_element)
+		count++;
+}
+
+Below approach: Store element in unordered_map with frequency store element with max frequency(index) also count its frequency and check for size/2 and print 
+
+Constraints:
+1 <= T<= 100
+1 <= N <= 107
+0 <= Ai <= 106
+
+Example:
+Input:
+2
+5
+3 1 3 3 2
+3
+1 2 3
+
+Output:
+3
+-1
+
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,count=0,index;
+        unordered_map<int,int>umap;
+        
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            umap[input]++;
+            if(umap[input]>count){
+                count=umap[input];
+                index=input;
+            }
+        }
+        auto it = umap.find(index);
+        if(count>size/2){
+            cout<<(it)->first<<"\n";
+        }
+        else{
+            cout<<-1<<endl;
+        }
+        
+    }
+
+	return 0;
+}
