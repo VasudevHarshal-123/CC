@@ -1,0 +1,57 @@
+Inversion of array
+Given an array of positive integers. The task is to find inversion count of array.
+
+Inversion Count : For an array, inversion count indicates how far (or close) the array is from being sorted. If array is already sorted then inversion count is 0. 
+If array is sorted in reverse order that inversion count is the maximum. 
+Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 107
+1 ≤ C ≤ 1018
+
+Example:
+Input:
+1
+5
+2 4 1 3 5
+
+Output:
+3
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size1,size2,input,count=0,i=0;
+        unordered_multimap<ll,ll>mmap1;
+        multiset<ll>mset;
+        vector<ll>v;
+        cin>>size1;
+        
+        for(int i=0;i<size1;i++){
+            cin>>input;
+            v.push_back(input);
+            mset.insert(input);
+            mmap1.insert({input,i});
+        }
+        
+        int x=0;
+        //USE MERGE SORT
+        for(auto it=mset.begin();it!=mset.end();++it,++x){
+            count+= abs(x-(mmap1.find(*it)->second));
+        }
+        cout<<count/2<<"\n";
+    }
+	return 0;
+}
