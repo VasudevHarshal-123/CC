@@ -1,0 +1,38 @@
+Binary Search
+Given a sorted array A[](0 based index) and a key "k"  you need to complete the function bin_search to  
+determine the position of the key if the key is present in the array. If the key is not  present then you have to return -1. 
+The arguments left and right denotes the left most index  and right most index of the array A[]. 
+There are multiple test cases. For each test case, this function will be called individually.
+
+Approach:STL lower_bound gives that element.
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 200
+
+Example:
+Input:
+2
+5
+1 2 3 4 5 
+4
+5
+11 22 33 44 55
+445
+
+Output:
+3
+-1
+
+
+
+int bin_search(int A[], int left, int right, int k)
+{
+    int N=right+1;
+    auto it = lower_bound(A,A+N,k);
+    if(*it!=k)				//If element not there it returns just greater number which can fail hence this condition
+        return -1;	
+    if(it!=A+N)
+    return it-A;  //0 based indexing
+    return -1;
+}
