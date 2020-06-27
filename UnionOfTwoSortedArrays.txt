@@ -4,6 +4,8 @@ Union of two arrays can be defined as the common and distinct elements in the tw
 
 Approach:Indexing;
 
+Approach2: Try to insert value into output array directly since they are sorted it can be done in O(N)
+
 Expected Time Complexity: O(N+M).
 Expected Auxiliary Space: O(N+M).
 
