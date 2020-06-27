@@ -1,0 +1,56 @@
+Union of Two Sorted Arrays
+Given two sorted arrays arr[] and brr[] of size N and M respectively. The task is to find the union of these two arrays.
+Union of two arrays can be defined as the common and distinct elements in the two arrays.
+
+Approach:Indexing;
+
+Expected Time Complexity: O(N+M).
+Expected Auxiliary Space: O(N+M).
+
+Constraints:
+1 <= T <= 100
+1 <= N, M <= 105
+1 <= arr[i], brr[i] <= 106
+
+Example:
+Input:
+3
+5 3
+1 2 3 4 5
+1 2 3
+5 5
+2 2 3 4 5
+1 1 2 3 4
+5 5
+1 1 1 1 1
+2 2 2 2 2
+Output:
+1 2 3 4 5
+1 2 3 4 5
+1 2
+
+
+vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+{
+    int max=0;
+    vector<int>v(1000001,0);
+    vector<int>op;
+    for(int i=0;i<n;i++){
+            v[arr1[i]]++;
+            if(arr1[i]>max){
+                max=arr1[i];
+            }
+    }
+    for(int i=0;i<m;i++){
+        
+            if(arr2[i]>max){
+                max=arr2[i];
+            }
+            v[arr2[i]]++;
+    }
+    for(int i=0;i<=max;i++){
+        if(v[i]>0)
+            op.push_back(i);
+    }
+    return op;
+}
