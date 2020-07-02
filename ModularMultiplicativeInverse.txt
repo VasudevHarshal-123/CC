@@ -1,0 +1,70 @@
+Modular Multiplicative Inverse
+Given two integers ‘a’ and ‘m’. The task is to find modular multiplicative inverse of ‘a’ under modulo ‘m’.
+Note: Print the smallest modular multiplicative inverse.
+
+Case: a=1 and m=23 output ==1 How?
+
+
+Constraints:
+1 <= T <= 100
+1 <= a <= 104
+1 <= m <= 104
+
+Expected Time Complexity : O(m)
+Expected Auxilliary Space : O(1)
+
+Example:
+Input:
+2
+3 11
+10 17
+Output:
+4
+12
+
+Testcase 1:
+Input:  a = 3, m = 11
+Output: 4
+Since (4*3) mod 11 = 1, 4 is modulo inverse of 3
+One might think, 15 also as a valid output as "(15*3) mod 11" 
+is also 1, but 15 is not in ring {0, 1, 2, ... 10}, so not valid.
+
+Testcase 2:
+Input:  a = 10, m = 17
+Output: 12
+Since (12*10) mod 17 = 1, 12 is the modulo inverse of 10
+
+Cases:for modulo inverse both element needs to be coPrime.
+
+bool coPrime(int a,int m){
+    
+    if(a<=1)
+        return true;
+    if((a%2==0&&m%2==0)||(a%3==0&&m%3==0)){
+        return true;
+    }    
+    for(int i=5;i*i<=m;i+=6){
+        if((a%i==0&&m%i==0)||(a%(i+2)==0&&m%(i+2)==0))
+            return true;
+    }
+    return false;
+}
+
+//Complete this function
+int modInverse(int a, int m)
+{
+    int min=10000000,index;
+    // for(int i=2;i<m;i++)
+    if(a==1)
+        return 1;
+    if(m%a==0 || a%m==0 || coPrime(a,m)){
+        return -1;
+    }
+    for(int i=1;i<m;i++){
+        if((a*i)%m<min){
+            min=a*i%m;
+            index = i;
+        }
+    }
+    return index;
+}
