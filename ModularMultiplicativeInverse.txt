@@ -50,7 +50,7 @@ bool coPrime(int a,int m){
     return false;
 }
 
-//Complete this function
+
 int modInverse(int a, int m)
 {
     int min=10000000,index;
