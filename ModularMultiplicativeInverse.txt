@@ -4,6 +4,15 @@ Note: Print the smallest modular multiplicative inverse.
 
 Case: a=1 and m=23 output ==1 How?
 
+SIMPLE SOLUTION: HERE, IF a and m ARE NOT COPRIME THE a*i%m!=1.
+for(int i=1;i<m;i++){ 
+    if((a*i)%m==1) 
+    return i;
+    
+}
+return -1;
+
+
 
 Constraints:
 1 <= T <= 100
