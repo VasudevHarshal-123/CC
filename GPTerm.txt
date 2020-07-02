@@ -1,0 +1,31 @@
+GP Term
+Given the first 2 terms A and B of a Geometric Series. The task is to find the Nth term of the series.
+
+Approach: Double is for explicit type conversion as A and B is in integer type.  Floor is also used.
+
+Expected Time Complexity : O(logN)
+Expected Auxilliary Space : O(1)
+
+Constraints:
+1 <= T <= 100
+-100 <= A <= 100
+-100 <= B <= 100
+1 <= N <= 5
+
+Example:
+Input:
+2
+2 3
+1
+1 2
+2
+Output:
+2
+2
+
+
+double termOfGP(int A,int B,int N)
+{
+    double r = (double)B/A;   
+    return floor(A*pow(r,(N-1)));
+}
