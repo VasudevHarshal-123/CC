@@ -1,7 +1,38 @@
+Merge k Sorted Arrays 
+Given K sorted arrays arranged in the form of a matrix of size K*K. The task is to merge them into one sorted array.
+
+Expected Time Complexity: O(nk Logk)
+Expected Auxiliary Space: O(k)
+
+Note: This space is required for returning the resulted sorted array, other work should be done in O(K) Auxiliary Space.
+
+APPROACH: Insert in set then return the output array. Time O(n*k*logn*k)  Space O(n*k)
+
+TRY HEAP approach.
+
+Constraints:
+1 <= T <= 50
+1 <= K <= 100
+
+Example:
+Input:
+2
+3
+1 2 3 4 5 6 7 8 9 
+4
+1 2 3 4 2 2 3 4 5 5 6 6 7 8 9 9
+
+Output:
+1 2 3 4 5 6 7 8 9
+1 2 2 2 3 3 4 4 5 5 6 6 7 8 9 9
+
+
 int *mergeKArrays(int arr[][N], int k)
 {
     multiset<int>s;
-    int *brr = new int[k*k];
+
+    int *brr = new int[k*k];		//OR int* A = (int*)malloc(sizeof(int)*k*k);// making a pesudo array
+
     int k=0;
     for(int i=0;i<k;++i){
         for(int j=0;j<k;j++){
