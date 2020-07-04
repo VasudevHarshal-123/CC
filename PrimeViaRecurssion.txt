@@ -1,0 +1,39 @@
+PrimeViaRecurssion
+For a given number N check if it is prime or not. A prime number is a number which is only divisible by 1 and itself.
+
+Approach: same iterative approach just the base cases increases. i*i is 
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 109
+
+Example:
+Input:
+1
+5
+Output:
+Yes
+
+
+
+bool isPrime(int n,int i){
+	   if(n<=1)
+	   {
+	       return false;
+	   } 
+	   if(n<=3){
+	       return true;
+	   }
+	   
+	   if(n%2==0 || n%3==0){
+	       return false;
+	   }
+	   if(i*i>n)				//This before
+	        return true;
+	        
+	   if(n%i==0 || n%(i+2)==0)
+	        return false;
+	   i+=6;
+	   isPrime(n,i);
+    
+}
