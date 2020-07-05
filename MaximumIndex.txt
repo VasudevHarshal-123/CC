@@ -1,0 +1,66 @@
+Maximum Index 
+Given an array A[] of N positive integers. The task is to find the maximum of j - i subjected to the constraint of A[i] <= A[j].
+
+Approach:Take two loops and check for above condition j start from size coz as soon as it finds the condition it breaks hence reducing the time.
+
+Constraints:
+1 ≤ T ≤ 1000
+1 ≤ N ≤ 103
+0 ≤ A[i] ≤ 1018
+
+Example:
+Input:
+1
+9
+34 8 10 3 2 80 30 33 1
+
+Output:
+6
+
+
+Explanation:
+Testcase 1:  In the given array A[1] < A[7] satisfying the required condition(A[i] <= A[j]) thus giving the maximum difference of j - i which is 6(7-1).
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,diff,max=INT_MIN;
+        vector<int>vect;
+        
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            vect.push_back(input);
+        }
+        
+        for(int i=0;i<size;++i){
+            for(int j=size-1;j>i;--j){
+                if(vect[i]<=vect[j]){
+                    diff=j-i;
+                    if(diff>max)
+                        max=diff;
+                    break;    			//Important: Else TLE;
+                }
+            }
+        }
+        if(max==INT_MIN)
+            cout<<0<<endl;
+        else    
+            cout<<max<<endl;
+    }
+
+	return 0;
+}
