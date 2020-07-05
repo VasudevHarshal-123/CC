@@ -1,0 +1,51 @@
+Find triplets with zero sum 
+Given an array of integers. Check whether it contains a triplet that sums up to zero. 
+
+Approach: Two pointer appproch, Sort the array then 1st loop runs on entire array. Second loop has two pointers one in start one end which check if sum>0 means
+	  end element is larger if sum<0 means the start element is small and move accordingly. 
+
+
+Expected Time Complexity: O(N2)
+Expected Auxiliary Space: O(1)
+
+Constrains:
+1 <= T <= 100
+1 <= N <= 104
+-106 <= Ai <= 106
+
+Example:
+Input:
+2
+5
+0 -1 2 -3 1
+3
+1 2 3
+Output:
+1
+0
+
+bool findTriplets(int arr[], int n)
+{ 
+    sort(arr,arr+n);
+    int sum=0,start,end;
+    for(int i=0;i<n;++i){
+        sum=arr[i];
+        start=i+1;
+        end=n-1;
+        sum+=arr[start]+arr[end];
+        while(start<end){
+            if(sum>0){
+                sum-=arr[end--];
+                sum+=arr[end];
+            }
+            else if(sum<0){
+                sum-=arr[start++];
+                sum+=arr[start];
+            }
+            else if(sum==0){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
