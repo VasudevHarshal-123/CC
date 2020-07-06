@@ -1,0 +1,84 @@
+Triplet Sum in Array 
+Given an array A[] of N numbers and another number x, determine whether or not there exist three elements in A[] whose sum is exactly x.
+
+Approach: sort and apply two pointer;
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ N ≤ 103
+1 ≤ A[i] ≤ 105
+
+Example:
+Input:
+2
+6 13
+1 4 45 6 10 8
+5 10
+1 2 4 3 6
+
+Output:
+1
+1
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+bool exist(vector<int>& vect,int size,int k){
+         int start,end,sum=0;
+        for(int i=0;i<size;i++){
+            sum=vect[i];
+            start=i+1;
+            end=size-1;
+            sum+=vect[start]+vect[end];
+            while(start<end){
+                if(sum>k){
+                    sum-=vect[end--];
+                    sum+=vect[end];
+                }
+                else if(sum<k){
+                    sum-=vect[start++];
+                    sum+=vect[start];
+                }
+                else if(sum==k){
+                    return 1;
+                }
+            }
+        }
+    return 0;
+
+}
+
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,k;
+        vector<int>vect;
+        
+        cin>>size>>k;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            vect.push_back(input);
+        }
+        sort(vect.begin(),vect.end());
+    
+        if(exist(vect,size,k)){
+            cout<<1<<endl;
+        }
+        else{
+            cout<<0<<"\n";
+        }
+    }
+
+	return 0;
+}
