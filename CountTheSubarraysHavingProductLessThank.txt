@@ -1,7 +1,7 @@
 Count the subarrays having product less than k 
 Given an array of positive numbers, the task is to find the number of possible contiguous subarrays having product less than a given number K.
 
-
+ 
 
 3
 15 18
