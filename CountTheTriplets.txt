@@ -1,0 +1,91 @@
+Count the triplets 
+Given an array of distinct integers. The task is to count all the triplets such that sum of two elements equals the third element.
+
+O(N^2);
+
+Constraints:
+1 <= T <= 100
+3 <= N <= 105
+1 <= A[i] <= 106
+
+Example:
+Input:
+2
+4
+1 5 3 2
+3
+3 2 7
+Output:
+2
+-1
+
+Approach:Here, We need to count when sum of two element is equal to third and how may such pairs can be formed.
+Example: 1 2 3 4 5 6 7 10 12
+	Here, 1+2=3
+	      1+3=4 and so on
+Thats why we cannot start the second pointer from other end. So start from 1 1st pointer at 2. 2nd pointer at 3 then check if yes then move both pointer forward else
+change accordingly.	 
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+ll findTriplets(vector<int>arr, int n)
+{ 
+    sort(arr.begin(),arr.end());
+    
+    ll sum=0,start,end,count=0;
+    
+    for(int i=0;i<n;++i){
+        sum=arr[i];
+        start=i+1;
+        end=i+2;
+        sum+=arr[start];
+          while(end<n){
+            if(sum<arr[end]){
+                sum-=arr[start++];
+                sum+=arr[start];
+            }
+            else if(sum>arr[end]){
+                end++;
+            }
+            else if(sum==arr[end]){
+                count++;
+                end++;
+                sum-=arr[start++];
+                sum+=arr[start];
+            }
+        }
+    }
+    return count;
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input;
+        vector<int>vect;
+        
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            vect.push_back(input);
+        }
+        int count=findTriplets(vect,size);
+        if(count==0)
+            cout<<-1<<endl;
+        else
+            cout<<count<<endl;
+        
+    }
+
+	return 0;
+}
