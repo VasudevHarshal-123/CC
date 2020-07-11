@@ -16,3 +16,9 @@ unsigned int getFirstSetBit(int n){
 
 OR
 unsigned int ans= (n==0)?0: log2((n^(n-1))+1);
+
+EX: 6 = 110 
+
+   6^5 = 100 =4+1=5
+
+	log2(5)=2.3= 2      in ques there is indexing from 1 
