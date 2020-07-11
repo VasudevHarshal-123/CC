@@ -12,6 +12,7 @@ unsigned int getFirstSetBit(int n){
         count++;
     }
     return 0;
-    
-    
 }
+
+OR
+unsigned int ans= (n==0)?0: log2((n^(n-1))+1);
