@@ -1,0 +1,56 @@
+Sum of all prime numbers between 1 and N. 
+Given a positive integer N, calculate the sum of all prime numbers between 1 and N(inclusive).
+
+NOTE: Array memeset is faster than vector(n+1,true);
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+void isPrime(int n){
+    ll sum=0;
+    
+    // vector<bool>v(n+1,true);
+    bool v[n+1];
+    memset(v,true,n+1);
+    v[1]=false;
+    for(int i=2;i*i<=n;i++){
+        
+        if(v[i]==true){
+            for(int j=i*i;j<=n;j+=i){
+                v[j]=false;
+            }
+            
+        }
+        
+    }
+    for(int i=2;i<=n;i++){
+        if(v[i]==true){
+            sum+=i;
+        }
+    }
+    cout<<sum<<endl;
+}
+
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    while(test--){
+        ll size,input,sum=0;
+        vector<int>vect;
+        
+        cin>>size;
+        isPrime(size);
+    
+        
+    }
+
+	return 0;
+}
