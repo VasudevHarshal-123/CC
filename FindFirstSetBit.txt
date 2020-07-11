@@ -1,0 +1,17 @@
+Find first set bit 
+Given an integer an N. The task is to print the position of first set bit found from the right side in the binary representation of the number.
+
+Approach:Keep shifting right till find one.
+
+unsigned int getFirstSetBit(int n){
+    int count=1;
+    while(n>0){
+        if(n&1==1)
+            return count;
+        n=n>>1;
+        count++;
+    }
+    return 0;
+    
+    
+}
