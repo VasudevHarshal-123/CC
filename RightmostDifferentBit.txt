@@ -1,0 +1,37 @@
+Rightmost different bit 
+Given two numbers M and N. The task is to find the position of rightmost different bit in binary representation of numbers.
+
+Expected Time Complexity: O(max(log m, log n)).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= T <= 100
+1 <= M <= 103
+1 <= N <= 103
+
+Example:
+Input:
+2
+11 9
+52 4
+
+Output:
+2
+5
+
+Explanation:
+Tescase 1: Binary representaion of the given numbers are: 1011 and 1001, 2nd bit from right is different.
+Testcase 2: Binary representation of the given numbers are:  ‭110100‬ and 0100, 5th bit fron right is different.
+
+EX: 54^4 = 10000 = 48
+	Then find first set bit using log2 formula.
+
+
+int posOfRightMostDiffBit(int m, int n)
+{
+    int x=m^n;
+    return x==0?0:log2((x^(x-1))+1);
+    // Your code here
+    
+    
+}
