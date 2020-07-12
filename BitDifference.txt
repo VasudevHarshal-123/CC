@@ -1,0 +1,41 @@
+Bit Difference 
+You are given two numbers A and B. Write a program to count number of bits needed to be flipped to convert A to B.
+
+Approach: XOR will give the difference then just count.
+
+Constraints:
+1 ≤ T ≤ 100
+1 ≤ A, B ≤ 103
+
+Example:
+Input:
+1
+10 20
+Output:
+4
+
+Explanation:
+Testcase1:
+A  = 01010
+B  = 10100
+Number of bits need to flipped = 4
+
+while(test--){
+        ll size,input,count=0;
+        vector<int>vect;
+        
+        cin>>size>>input;
+        
+        int x = size^input;
+        
+        if(x&1)
+            count++;
+        
+        while(x>0){
+            if(x>>1&1)
+                count++;
+            x=x>>1;
+        }
+        cout<<count<<endl;
+}
+
