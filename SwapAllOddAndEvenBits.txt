@@ -1,0 +1,46 @@
+Swap all odd and even bits 
+Given an unsigned integer N. The task is to swap all odd bits with even bits. 
+For example, if the given number is 23 (00010111), it should be converted to 43(00101011). 
+Here, every even position bit is swapped with adjacent bit on right side(even position bits are highlighted in binary representation of 23), 
+and every odd position bit is swapped with adjacent on left side.
+
+NOTE:   bitset<32>(n).to_string() converts decimal to binary then to string;
+	
+	unsigned long long stoull (const string&  str, size_t* idx = 0, int base = 10);
+	is used to convert binary string to decimal.
+	
+
+Expected Time Complexity: O(log N).
+Expected Auxiliary Space: O(1).
+
+
+Constraints:
+1 ≤ T ≤ 105
+1 ≤ N ≤ 109
+
+Example:
+Input:
+2
+23
+2
+
+Output:
+43
+1
+
+
+
+unsigned int swapBits(unsigned int n)
+{
+	string binary = bitset<32>(n).to_string();
+	char temp;
+	for(int i=0;i<binary.length();i+=2){
+	    temp=binary[i];
+	    binary[i]=binary[i+1];
+	    binary[i+1]=temp;
+	}
+	int x = stoull(binary,0,2); 
+	return x;
+}
+
+
