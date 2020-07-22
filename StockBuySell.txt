@@ -1,0 +1,95 @@
+Stock buy and sell 
+The cost of stock on each day is given in an array A[] of size N. 
+Find all the days on which you buy and sell the stock so that in between those days your profit is maximum.
+
+
+APPROACH: Here,We iterate through array and if(price[i]<price[i-1] && i-1!=start) we do i-1 !=start because in 2nd test case it should avoid inserting at 23
+	(price[i]<price[i-1] && i-1==start) it is done so that in 2nd test case the start moves from 23 to 13
+	(price[i]==price[i-1] && i-1==start) it is for 3rd or 4th test case where same digits appear then we keep on moving forward by ++start
+	
+	if(start==i-1 && v.size()==0){
+        cout<<"No Profit";}	This is done if same no is there throughout like 4th test. so only 4,4 will be there in vector i.e size == 0 && start will be i-1
+
+
+	if(start!=i-1){
+            p.first = start;
+            p.second = i-1;
+            v.push_back(p);
+        }	This is done to deal with last test case else 17,17 will be inserted.
+		        
+
+Expected Time Complexity : O(N)
+Expected Auxiliary Space: O(N)
+
+Constraints:
+1 <= T <= 100
+2 <= N <= 103
+0 <= Ai <= 104
+
+Example
+Input:
+6
+
+7
+100 180 260 310 40 535 695
+
+10
+23 13 25 29 33 19 34 45 65 67
+
+5
+4 2 2 2 4
+
+5
+5 5 5 5 5
+
+9
+57 69 12 59 5 9 29 29 99
+
+18
+11 42 49 96 23 20 49 26 26 18 73 2 53 59 34 99 25 2
+
+Output:
+(0 3) (4 6)
+(1 4) (5 9)
+(3 4)
+No Profit
+(0 1) (2 3) (4 8)
+(0 3) (5 6) (9 10) (11 13) (14 15)
+
+
+void stockBuySell(int price[], int n)
+{
+    vector<pair<int,int>>v;
+    pair<int,int>p;
+    
+    int i,start = 0, end = 0,value=INT_MIN;
+    
+    for(i=1;i<n;i++){
+        if(price[i]<price[i-1] && i-1!=start){
+            p.first=start;
+            p.second = i-1;
+            v.push_back(p);
+            start=i;
+        }
+        if((price[i]<price[i-1] && i-1==start) ||(price[i]==price[i-1] && i-1==start)){
+            ++start;
+        }
+    }
+    
+    
+    if(start==i-1 && v.size()==0){
+        cout<<"No Profit";
+    }
+    else{
+        if(start!=i-1){
+            p.first = start;
+            p.second = i-1;
+            v.push_back(p);
+        }
+    
+        for(int i=0;i<v.size();++i){
+            cout<<"("<<v[i].first<<" "<<v[i].second<<") ";
+        }
+    }
+    
+}
