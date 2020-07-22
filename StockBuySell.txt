@@ -18,6 +18,38 @@ APPROACH: Here,We iterate through array and if(price[i]<price[i-1] && i-1!=start
         }	This is done to deal with last test case else 17,17 will be inserted.
 		        
 
+void stockBuySell(int price[], int n)
+{
+    
+    // Your code here
+    int count=0,check=0,temp=0;
+    for(int i=1;i<n;i++)
+        {
+            if(price[temp]<price[i] && price[i-1]<price[i])
+                {
+                    count++;
+                    check++;
+                    if(i==n-1)
+                        cout<<"("<<temp<<" "<<i<<")";
+                }
+            else
+                {
+                    if(count>0)
+                    {
+                        cout<<"("<<temp<<" "<<i-1<<") ";
+                    }
+                        temp=i;
+                        count=0;
+                
+                }
+        }
+    if(check==0)
+    cout<<"No Profit";
+}
+
+BEST SOL
+
+
 Expected Time Complexity : O(N)
 Expected Auxiliary Space: O(N)
 
