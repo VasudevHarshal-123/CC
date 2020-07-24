@@ -1,0 +1,70 @@
+Kadane's Algorithm 
+Given an array arr of N integers. Find the contiguous sub-array with maximum sum.
+
+Constraints:
+1 ≤ T ≤ 110
+1 ≤ N ≤ 106
+-107 ≤ A[i] <= 107
+
+Example:
+Input
+2
+5
+1 2 3 -2 5
+4
+-1 -2 -3 -4
+Output
+9
+-1
+
+Approach:Keep on adding elements(Prefix sum) unless the sum is <= 0 then sum = 0 
+means if -ve occurs no issue unless that -ve impact our sum to extent that it becomes less than 1
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll sum=0,size,input,min=INT_MIN;
+        vector<int>vect;
+        
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            if(input>min)
+                min=input;
+            if(sum+input<=0){
+                sum=0;
+            }
+            else{
+            sum+=input;
+            vect.push_back(sum);
+            }
+        }
+        sum=0;
+        if(min<=0){
+            cout<<min<<endl;
+        }
+        else{
+        for(int i=0;i<vect.size();i++){
+            if(sum<vect[i])
+                sum=vect[i];
+        }
+        cout<<sum<<endl;
+        }
+    }
+
+	return 0;
+}
