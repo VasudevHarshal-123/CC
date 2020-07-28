@@ -3,7 +3,8 @@ Given an array A[] of N positive integers which can contain integers from 1 to N
 Your task is to count the frequency of all elements from 1 to N.
 
 Approach:Every time an element occurs add n to that elements index. Also, we do %n because if the index where it is presents element occur before it would have added
-	 n at that index.
+	 n at that index.We are subtracting 1 from everyelement so that 0th index will hold 
+	value 1 
 
 Expected Time Complexity: O(N)
 Expected Auxiliary Space: O(1)
@@ -30,6 +31,9 @@ Sample Output:
 
 void frequencycount(vector<int>&arr, int n)
 {
+
+	Subtract 1 from every element so that the elements 
+    // become in range from 0 to n-1 
     for(int i = 0;i<n;i++){
         arr[i]--;
     }
@@ -37,7 +41,8 @@ void frequencycount(vector<int>&arr, int n)
     for(int i=0;i<n;i++){
         arr[arr[i]%n]+=n;
     }
-    
+	/ To print counts, simply print the number of times n 
+    // was added at index corresponding to every element 	    
     for(int i=0;i<n;i++){
         arr[i]=arr[i]/n;
     }
