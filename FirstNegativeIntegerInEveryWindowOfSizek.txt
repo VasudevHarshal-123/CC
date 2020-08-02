@@ -1,0 +1,79 @@
+First negative integer in every window of size k
+Given an array and a positive integer k, find the first negative integer for each and every window(contiguous subarray) of size k.
+
+Approach: insert 1st window then loop through rest.As the element leave window remove and print the first element of window
+
+Constraints:
+1<=T<=10^5
+1<=n<=10^5
+1<=a[i]<=10^5
+1<=k<=n
+
+Example:
+Input:
+2
+5
+-8 2 3 -6 10
+2
+8
+12 -1 -7 8 -15 30 16 28
+3
+
+Output:
+-8 0 -6 -6
+-1 -1 -7 -15 -15 0
+
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll test;
+    cin>>test;
+    
+    while(test--){
+        ll size,input,k;
+        vector<int>vect;
+        deque<int>dq;
+        cin>>size;
+        
+        for(int i=0;i<size;i++){
+            cin>>input;
+            vect.push_back(input);
+        }
+        cin>>k;
+        for(int i=0;i<k;i++){
+            if(vect[i]<0)
+                dq.push_back(vect[i]);
+        }
+        
+        
+        if(dq.empty())
+            cout<<0<<" ";
+        else
+            cout<<dq.front()<<" ";   
+        
+        for(int i=k;i<size;i++){
+            if(vect[i]<0)
+                dq.push_back(vect[i]);
+            if(vect[i-k]==dq.front()){
+                dq.pop_front();
+            } 
+            if(dq.empty())
+                cout<<0<<" ";
+            else
+                cout<<dq.front()<<" ";   
+      
+        }
+        cout<<endl;
+        
+    }
+	return 0;
+}
+
