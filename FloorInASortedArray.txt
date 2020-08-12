@@ -1,0 +1,47 @@
+Floor in a Sorted Array
+Given a sorted array arr[] of size N without duplicates, and given a value x. Find the floor of x in given array. 
+Floor of x is defined as the largest element K in arr[] such that K is smaller than or equal to x.
+
+Approach: lower_bound()-v.begin() here will give count.
+	cases: 
+		If value is greater than all values. y==n, so last element will be ans.
+		if that element is found return index 
+		if that index is not found and that value is in range then return value less than that.
+	
+
+Input:
+N = 7, x = 0 
+arr[] = {1,2,8,10,11,12,19}
+Output: -1
+Explanation: No element less 
+than 0 is found. So output 
+is "-1".
+Example 2:
+
+Input:
+N = 7, x = 5 
+arr[] = {1,2,8,10,11,12,19}
+Output: 1
+Explanation: Number less than 5
+ is 2, whose index is 1(0-based 
+indexing).
+
+
+Expected Time Complexity: O(log N).
+Expected Auxiliary Space: O(1).
+
+
+int findFloor(vector<long long> v, long long n, long long x){
+    
+    int y = lower_bound(v.begin(),v.end(),x)-v.begin();
+    
+    if(y==n)
+        return y-1;
+    
+    if(v[y]==x)
+        return y;
+    
+    if(v[y]>x)    
+        return y-1;
+    
+}
