@@ -31,6 +31,23 @@ Expected Time Complexity: O(log N).
 Expected Auxiliary Space: O(1).
 
 
+
+/***********************If array was passed******************************/
+    int arr[n];
+    
+    for(int i=0;i<n;i++){
+        arr[i]=v[i];
+    }
+    
+    int *z = &arr[0];
+    
+    int *f = lower_bound(arr,arr+n,x);
+    
+    int y=f-z;
+
+    .....	
+
+
 int findFloor(vector<long long> v, long long n, long long x){
     
     int y = lower_bound(v.begin(),v.end(),x)-v.begin();
