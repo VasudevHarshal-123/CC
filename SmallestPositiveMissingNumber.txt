@@ -6,6 +6,16 @@ Approach: If all +ve then to their index *-1 the place wich is not -ve will be d
 	  In case of -ve values pair the values with their index the index which is not paired is you value
 	  nums[i] != nums[nums[i]-1] this will check if paired or not and will also avoid [1,1] infinite loop in such scenario
 	 O(n) coz every nuber will be swapped atmost twice.	
+
+Example:	[2,4,5,1,-6,8] --> [4,2,5,1,-6,8]  2 is at its index, pointer is still at 0 and checks for 4
+		
+		[1,2,5,4,-6,8]	4 is at its index and pointer checks for 1 and 2 which is at its index 
+
+		[1,2,-6,4,5,8]  -6 is less than 0 so, nothing happens and 8 is greater than available index
+				
+
+
+
 Constraints:
 1 <= T <= 100
 1 <= N <= 106
