@@ -1,0 +1,79 @@
+Count only Repeated
+Given an array arr[] of N positive integers, where elements are consecutive (sorted). 
+Also, there is a single element which is repeating X (any variable) number of times. 
+Now, the task is to find the element which is repeated and number of times it is repeated.
+
+Approach: 
+		Part 1: Find which element is repeated. Can be done in log(n). 
+			2 3 4 5 5
+			2 2 3 4 5
+		Here, we are checking if midle element is at its index. If 2 is at 0th index then 4(mid) is at correct index means some later element is repeated
+		Or,if 3 is not at greater index means a lower element is repeated.
+
+		Part2: Once, repeated element is found.
+			
+			One can use lower_bound and upper_bound and find its frequency.
+			Note: upper bound gives an element greater still we are  not doing -1 coz this way we get exact frequency.
+
+			equal Range in array
+				int *s=&arr[0];
+  				pair<int*,int*>pi;
+    
+    				pi=equal_range(arr,arr+n,repeat);
+  
+  				pair<int,int>p;
+    				p.first = repeat;
+    				p.second = (pi.second-s)-(pi.first-s);
+
+			
+			Manual
+
+
+For Input:
+5
+1 2 3 3 4
+Your Output is:
+3 2
+
+Constraints:
+1 <= N <= 107
+1 <= arr[i] <= 1015
+
+Expected Time Complexity : O(logN)
+Expected Auxilliary Space : O(1)
+
+
+
+pair<int, int> findRepeating(int *arr, int n){
+    int zero=arr[0],start=0,end=n-1,mid=(start+end)/2,repeat=-1;
+    
+    while(start<=end){
+        if(arr[mid]<zero+mid){
+            end=mid;
+            if(arr[mid]==arr[mid+1]){
+                repeat=arr[mid];
+                break;
+            }
+        }
+        else{
+            if(arr[mid]==arr[mid+1] ||arr[mid]==arr[mid-1]){
+                repeat=arr[mid];
+                break;
+            }
+            start=mid;
+        }
+        mid=(start+end)/2;
+    }
+    
+    int *s=&arr[0];
+    
+    int *repeatStart = lower_bound(arr,arr+n,repeat);
+    int *repeatEnd = upper_bound(arr,arr+n,repeat);
+    
+    pair<int,int>p;
+    p.first = repeat;
+    p.second = (repeatEnd-s)-(repeatStart-s);
+ 
+   return p;
+    
+}
