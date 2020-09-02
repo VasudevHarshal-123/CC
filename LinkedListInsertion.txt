@@ -1,0 +1,37 @@
+Linked List Insertion 
+
+Create a link list of size N according to the given input literals. 
+Each integer input is accompanied by an indicator which can either be 0 or 1. If it is 0, insert the integer in the beginning of the link list. 
+If it is 1, insert the integer at the end of the link list. 
+Hint: When inserting at the end, make sure that you handle NULL explicitly.
+
+Approach: If no LL exists then send initial node. 
+	INSERTatStart:Make new node point it to head and return it
+	InsertAtEnd: Go till end point it to new node, keep a temp which will be head and return it
+
+// function inserts the data in front of the list
+Node *insertAtBegining(Node *head, int newData) {
+   struct Node* t = new Node(newData);
+   if(head==NULL){
+       return t;
+   }
+   t->next = head; 
+   return t;
+}
+
+
+// function appends the data at the end of the list
+Node *insertAtEnd(Node *head, int newData)  {
+   struct Node* t=new Node(newData);
+   Node* temp=head;
+   if(head==NULL){
+       return t;
+   }
+   while(head->next!=NULL){
+       head=head->next;
+   }
+   t->next=NULL;
+   head->next=t;
+   return temp;
+}
+
