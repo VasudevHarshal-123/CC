@@ -1,0 +1,60 @@
+Maximum occured integer 
+Given N integer ranges, the task is to find the maximum occurring integer in these ranges. 
+If more than one such integer exits, find the smallest one. The ranges are given as two arrays L[] and R[].  
+L[i] consists of starting point of range and R[i] consists of corresponding end point of the range.
+
+Approach: Here, we are doing prefix sum but arr[R[i]+1]-- as it should not increase its range
+	
+	ex: L:1 5
+	    R:3 8
+
+	Arr: 0 0 0 0 0 0 0 0 
+	     1 0 0 -1 0 0 0 0
+	     1 0 0 -1 1 0 0 0
+
+	sum: 1 1 1 0 1 1 1 1
+	Ans 1;	 	
+
+
+Input:
+N = 4
+L[] = {1,4,3,1}
+R[] = {15,8,5,4}
+Output: 4
+Explanation: The given ranges are [1,15]
+ [4, 8] [3, 5] [1, 4]. The number that 
+is most common or appears most times in 
+the ranges is 4.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(N).
+
+
+Constraints:
+1 <= n <= 106
+0 <= L[i], R[i] <= 106
+
+
+int maxOccured(int L[], int R[], int n, int maxx){
+
+    int arr[maxx+1];
+    
+    memset(arr,0,sizeof(arr));
+    
+    for(int i=0;i<n;i++){
+        arr[L[i]]++;
+        arr[R[i]+1]--;
+    }
+    
+    int high = arr[0],index=0;
+    for(int i=1;i<maxx;i++){
+        arr[i]+=arr[i-1];
+        if(arr[i]>high){
+            index=i;
+            high=arr[i];    
+        }
+    }
+    return index;
+}
+
+	
