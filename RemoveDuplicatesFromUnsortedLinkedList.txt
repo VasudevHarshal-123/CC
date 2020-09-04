@@ -1,0 +1,33 @@
+Remove duplicates from an unsorted linked list 
+Given an unsorted linked list of N nodes. The task is to remove duplicate elements from this unsorted Linked List. 
+When a value appears in multiple nodes, the node which appeared first should be kept, all others duplicates are to be removed.
+
+input:5,2,4,2
+outp: 5 2 4
+
+Approach: As an elment occurs 1st time increase its count and as it occurs more than one time remove it
+
+Node * removeDuplicates( Node *head) 
+{
+    
+    Node* t1=head,*t2=head;
+    int arr[10001]={0};
+    
+    // while(t1->next!=NULL){
+    //     arr[t1->data]++;
+    //     t1=t1->next;
+    // }
+    // t1=head;
+    while(t2->next!=NULL){
+        arr[t2->data]++;
+        t2=t2->next;
+        if(arr[t2->data]>0){
+            t1->next=t2->next;
+            // t2=t1->next;
+        }
+        else{
+            t1=t1->next;
+        }
+    }
+    return head;
+}
