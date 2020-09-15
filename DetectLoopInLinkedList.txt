@@ -1,0 +1,20 @@
+Detect Loop in linked list 
+Given a linked list of N nodes. The task is to check if the the linked list has a loop. Linked list can contain self loop.
+
+Approach: the if() is used to avoid segment fault
+
+bool detectLoop(Node* head)
+{
+    Node *t = head;
+    Node *t2 = t;
+    while(t2->next!=NULL){
+        t2=t2->next;
+        if(t==t2){
+            return true;
+        }
+        t=t->next;
+        if(t2->next!=NULL)
+            t2=t2->next;
+    }
+    return false;
+}
