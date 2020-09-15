@@ -1,0 +1,18 @@
+Reverse a linked list 
+Approach: we cut tie of one link at a time, at last returning prevNode because prevNode becomes current and current=nextNode=NULL.
+
+struct Node* reverseList(struct Node *head)
+{
+    Node *current,*prevNode=NULL,*nextNode;
+    prevNode=NULL;
+    current=nextNode=head;
+    
+    while(nextNode!=NULL){
+        nextNode=current->next;
+        current->next=prevNode;
+        prevNode=current;
+        current=nextNode;
+    }
+    head = prevNode;
+return head;
+}
