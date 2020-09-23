@@ -1,0 +1,46 @@
+Check if array is sorted and rotated 
+Given an array arr[] of N distinct integers, check if this array is Sorted (non-increasing or non-decreasing) and Rotated counter-clockwise. 
+Note that input array may be sorted in either increasing or decreasing order, then rotated.
+A sorted array is not considered as sorted and rotated, i.e., there should be at least one rotation.
+
+Approach:
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= N <= 106
+1 <= A[i] <= 106
+
+
+
+
+// arr: input array
+// num: length of array
+// This function returns true or false
+bool checkRotatedAndSorted(int arr[], int num){
+    
+    int count=0;
+    
+    if(arr[num-1]>arr[0]){
+        for(int i=0;i<num-1;i++){
+            if(arr[i]<arr[i+1]){
+                count++;
+            }
+        }
+    }
+    else{    
+        
+        for(int i=0;i<num-1;i++){
+            if(arr[i]>arr[i+1]){
+                count++;
+            }
+        }
+        
+    }
+    if(count==1)
+        return true;
+        
+    return false;    
+    
+}
