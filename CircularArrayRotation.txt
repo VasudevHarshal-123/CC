@@ -1,0 +1,24 @@
+Circular Array Rotation:https://www.hackerrank.com/challenges/circular-array-rotation/problem
+For each array, perform a number of right circular rotations and return the value of the element at a given index.
+
+rotate(vec1.begin(), vec1.begin()+rotL, vec1.end()); //For left rotate
+
+
+Left Rotation : To rotate left, we need to add the vector index. For example, you have to rotate vector left 3 times. 
+The 3th index of vector becomes first element. vec.begin() + 3 will rotate vector 3 times left.
+
+Right Rotation : To rotate right, we need to subtract the vector index. 
+For example, you have to rotate vector right 3 times. The 3th last index of vector becomes first element. vec.begin()+vec.size()-3 will rotate vector 3 times right.
+
+
+// Complete the circularArrayRotation function below.
+vector<int> circularArrayRotation(vector<int> a, int k, vector<int> queries) {
+    vector<int>b(queries.size());
+    k=k%a.size();						//To avoid TLE
+    rotate(a.begin(),a.begin()+a.size()-k,a.end());
+    int i=0;
+    for(auto x:queries){
+        b[i++]=a[x];
+    }
+    return b;
+}
