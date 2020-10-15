@@ -1,0 +1,61 @@
+BetweenTwoSets
+
+
+You will be given two arrays of integers and asked to determine all integers that satisfy the following two conditions:
+
+The elements of the first array are all factors of the integer being considered
+The integer being considered is a factor of all elements of the second array
+
+
+Constraints
+
+Output Format
+
+Print the number of integers that are considered to be between  and .
+
+Sample Input
+
+2 3
+2 4
+16 32 96
+Sample Output
+
+3
+
+long long int gcd(int a,int b){
+    
+    if(b==0)
+        return a;
+    return gcd(b,a%b);    
+}
+
+long long int LCM(vector<int>a){
+    long long int ans = a[0];
+
+    for(int i=1;i<a.size();i++){
+        ans = (ans*a[i])/gcd(ans,a[i]);
+    }
+    return ans;
+}
+
+int getTotalX(vector<int> a, vector<int> b) {
+   long long int lcm = LCM(a),temp;
+   temp=lcm;
+    sort(b.begin(),b.end());
+    long long int minimum = b[0],count=0;
+    
+    while(lcm<=minimum){
+        for(int i=0;i<b.size();i++){
+            if(b[i]%lcm!=0){
+                break;
+            }
+            if(i==b.size()-1){
+                count++;
+            }
+        }
+    lcm+=temp;
+    }
+
+    return count;
+
+}
