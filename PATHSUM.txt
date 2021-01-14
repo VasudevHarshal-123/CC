@@ -1,0 +1,23 @@
+https://leetcode.com/problems/path-sum/
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+Note: A leaf is a node with no children.
+
+NOTE: HERE WE CAN'T HAVE A TERMINATION CONDITION ON SUM AS THERE CAN BE NEGATIVES
+
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(!root)
+            return false;
+        if(!root->left && !root->right && sum-root->val==0){
+            return true;
+        }
+        // if(sum<=0)
+        //     return false;
+        bool left = hasPathSum(root->left,sum-(root->val));// f
+        bool right = hasPathSum(root->right,sum-(root->val));//
+        
+        return left || right;
+    }
+};
