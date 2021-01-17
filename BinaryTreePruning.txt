@@ -11,7 +11,7 @@ Return the same tree where every subtree (of the given tree) not containing a 1 
 I/P			O/P
 [1,1,0,0,1,0,0] = [1,1,0,null,null,1]
 
-HAD TO MANUALLY DELETE NODE. 
+REMOVE NODE MANUALLY AND DELETE THEM AFTER REMOVING. TO DELETE WE NEED TO KEEP REFRENCE AND CUT LINK THEN ONLY DELETE POSSIBLE 
 
 class Solution {
 public:
@@ -27,11 +27,14 @@ public:
         TreeNode *left = pruneTree(root->left);
         TreeNode *right = pruneTree(root->right);
         if(!left){
+            TreeNode* temp = root->left;
             root->left = NULL;
-            
+            delete(temp);
         }
         if(!right){
+            TreeNode* temp = root->right;
             root->right = NULL;
+            delete(temp);
         }
         if(!left && !right && root->val==0)
         return NULL;
