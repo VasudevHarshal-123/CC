@@ -1,0 +1,40 @@
+Most Frequent Subtree Sum
+https://leetcode.com/problems/most-frequent-subtree-sum/
+Given the root of a tree, you are asked to find the most frequent subtree sum. 
+The subtree sum of a node is defined as the sum of all the node values formed by the subtree rooted at that node (including the node itself). 
+So what is the most frequent subtree sum value? If there is a tie, return all the values with the highest frequency in any order.
+
+Time: O(N) touching an element at max thrice i.e O(3N) = O(N)
+Space: O(h+unique Elem) recursion stack + map
+
+
+class Solution {
+public:
+    int findFreq(TreeNode *root, unordered_map<int,int>&freq){
+        if(!root)
+            return 0;
+
+        int left = findFreq(root->left,freq);
+        int right = findFreq(root->right,freq);
+
+        freq[left+right+(root->val)]++;
+        
+        return left+right+root->val; 
+    }
+    
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        unordered_map<int,int>freq;
+        int maximum = 0;
+        vector<int>output;
+        findFreq(root,freq);
+        for(auto x:freq){
+            maximum = max(maximum,x.second);
+        }
+        for(auto x: freq){
+            cout<<x.first<<" "<<x.second<<endl;
+            if(x.second==maximum)
+                output.push_back(x.first);
+        }
+        return output;
+    }
+};
