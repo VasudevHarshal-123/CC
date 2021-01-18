@@ -1,0 +1,91 @@
+Binary Tree Preorder Traversal
+https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+APPROACH 1: RECURSIVE
+
+class Solution {
+public:
+    void preOrderHelper(TreeNode* root, vector<int>&out){
+        if(!root)
+            return;
+        out.push_back(root->val);
+        preOrderHelper(root->left,out);
+        preOrderHelper(root->right,out);
+        
+        return;
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>out;
+        preOrderHelper(root,out);
+        return out;
+    }
+};
+
+APPROACH 2: ITERATIVE USING PAIR
+
+Here null node is taken care at starting.
+in else {} we are fushing temp.first->lt and rt coz its stack's top() root will be same so dont use root
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>out;
+        
+        if(!root)
+            return out;
+       
+        stack<pair<TreeNode*,int>>stk;
+        stk.push({root,0});
+        
+        while(!stk.empty()){
+            pair<TreeNode*,int>temp = stk.top();
+            if(temp.second){
+                out.push_back(temp.first->val);
+                cout<<temp.first->val<<" ";
+                stk.pop();
+            } 
+            else {
+                stk.pop();
+                if(temp.first->right)                
+                    stk.push({temp.first->right,0});
+                
+                if(temp.first->left)
+                    stk.push({temp.first->left,0});
+                stk.push({temp.first,1});
+            }
+        }
+        return out;
+    }
+};
+
+
+
+APPROACH 3: ITERATIVE WITHOUT USING PAIR
+
+Here, We dont need to re push top as we can insert its val in vector and get rid of it	
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>out;
+        
+        if(!root)
+            return out;
+       
+        stack<TreeNode*>stk;
+        stk.push(root);
+        
+        while(!stk.empty()){
+            TreeNode* temp = stk.top();
+            stk.pop();
+            if(temp->right)
+              stk.push(temp->right);
+            if(temp->left)
+                stk.push(temp->left);
+            out.push_back(temp->val);
+        }
+        return out;
+    }
+};
