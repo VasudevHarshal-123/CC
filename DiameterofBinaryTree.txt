@@ -1,0 +1,58 @@
+Diameter of Binary Tree
+
+Given a binary tree, you need to compute the length of the diameter of the tree. 
+The diameter of a binary tree is the length of the longest path between any two nodes in a tree. 
+This path may or may not pass through the root.
+
+APPROACH 1: USING HELPER
+
+class Solution {
+public:
+    int dHelper(TreeNode* root, int &output){
+          if(!root)
+            return 0;
+        if(!root->left && !root->right)
+            return 1;
+        
+        int left = dHelper(root->left,output);
+        int right = dHelper(root->right,output);
+        
+        output = max(output,left+right);
+        return max(left,right)+1;
+        
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int output = 0;
+        dHelper(root,output);
+        return output;
+    }
+};
+
+
+APPROACH 2: RETURNING PAIR
+p.first is overall maximum and p.second is what child returns to its parent.
+
+class Solution {
+public:
+    pair<int,int>dHelper(TreeNode* root){
+        if(root==NULL)
+            return {0,0};
+        if(root->left == NULL && root->right == NULL){
+            return {0,1};
+        }
+        pair<int,int> left = dHelper(root->left);
+        pair<int,int> right = dHelper(root->right);
+        pair<int,int> p;
+        p.second = max(left.second,right.second)+1;
+        p.first = left.second+right.second;
+        p.first = max(p.first,max(left.first,right.first));
+        return p;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        pair<int,int> output = dHelper(root);
+        return output.first;
+    }
+};
+
+
+APPROACH 3: TOP-DOWN USING MAP 

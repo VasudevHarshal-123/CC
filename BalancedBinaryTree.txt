@@ -1,0 +1,53 @@
+Balanced Binary Tree
+https://leetcode.com/problems/balanced-binary-tree/
+
+Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+
+APPROACH 1: HELPER FUNCTION;
+
+class Solution {
+public:
+    int balanceHelper(TreeNode* root,bool &out){
+        if(!root)
+            return 0;
+        int left = balanceHelper(root->left,out);
+        int right = balanceHelper(root->right,out);
+        if(abs(left-right)>1){
+            out=false;
+            return 0;
+        }
+        return max(left,right)+1;
+    }
+    bool isBalanced(TreeNode* root) {
+        bool out = true;
+        balanceHelper(root, out);
+        return out;
+    }
+};
+
+APPROACH 2: PAIR FUNCTION
+Here, we return height and bool. The if() is important as it passes the bool value from down the tree 
+
+class Solution {
+public:
+    pair<int,bool>balanceHelper(TreeNode* root){
+        if(!root)
+            return {0,true};
+        pair<int,bool> left = balanceHelper(root->left);
+        pair<int,bool> right = balanceHelper(root->right);
+
+        if(abs(left.first-right.first)>1 || !left.second || !right.second){
+            return {max(left.first,right.first)+1,false};
+        }
+        return {max(left.first,right.first)+1,true};
+    }
+    bool isBalanced(TreeNode* root) {
+        pair<int,bool> out = balanceHelper(root);
+        return out.second;
+    }
+};
