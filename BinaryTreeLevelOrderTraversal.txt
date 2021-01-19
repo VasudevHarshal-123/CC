@@ -1,0 +1,46 @@
+Binary Tree Level Order Traversal
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+
+Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+
+return its level order traversal as:
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+
+
+APPROACH: IN LEVEL ORDER OR BFS WE TRAVERSE LEVEL BY LEVEL FOR THAT WE HAVE TO USE QUEUE ALSO, THERE IS A FOR LOOP HERE BECAUSE OF THE PUTPUT TYPE.
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>>output;
+        queue<TreeNode*>q;
+        if(!root)
+            return output;
+        q.push(root);
+        while(!q.empty()){
+            int s = q.size();
+            vector<int>out;
+            for(int i=0;i<s;i++){
+                
+            TreeNode* temp = q.front();                
+            out.push_back(temp->val);            
+            q.pop();            
+            if(temp->left)
+                q.push(temp->left);
+            if(temp->right)
+                q.push(temp->right);
+            }
+            output.push_back(out);
+
+        }
+        
+        return output;
+    }
+};
