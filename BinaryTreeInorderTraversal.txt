@@ -1,0 +1,63 @@
+Binary Tree Inorder Traversal
+https://leetcode.com/problems/binary-tree-inorder-traversal/
+
+APPROACH 1: RECURSIVE
+
+class Solution {
+public:
+    void preOrderHelper(TreeNode* root, vector<int>&out){
+        if(!root)
+            return;
+
+        preOrderHelper(root->left,out);
+        out.push_back(root->val);
+        preOrderHelper(root->right,out);
+        
+        return;
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>out;
+        preOrderHelper(root,out);
+        return out;
+    }
+};
+
+
+APPROACH 2: ITERATIVE WITH PAIR
+
+Here we are pushing right , root then left so that left is on top of stack and print accordingly.
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>out;
+        
+        if(!root)
+            return out;
+        
+        stack<pair<TreeNode*,int>> stk;
+        if(root->right)
+            stk.push({root->right,0});
+        stk.push({root,1});
+        if(root->left)
+            stk.push({root->left,0});
+        
+        while(!stk.empty()){
+            pair<TreeNode*,int>temp = stk.top();
+            cout<<temp.first->val<<" "<<temp.second<<endl;
+            stk.pop();
+            if(temp.second){
+                out.push_back(temp.first->val);
+            }
+            else{
+                if(temp.first->right)
+                     stk.push({temp.first->right,0});
+                stk.push({temp.first,1});
+                if(temp.first->left)
+                    stk.push({temp.first->left,0});
+            }
+        }
+        return out;
+    }
+};
+
