@@ -61,3 +61,42 @@ public:
     }
 };
 
+
+APPROACH 3: ITERATIVE WITHOUT USING PAIR
+INORDER TRAV WE PRINT LEFT MOST THEN ROOT THEN GO RIGHT IF RIGHT HAS LEFT THEN GO THERE AND SO ON. THATS WHY TWO LOOP IF RIGHT HAS LEFT THEN REPEAT THE PROCESS.
+TIME:O(2N) AS WE ARE TOUCHING EVERY ELEM TWICE. 
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>out;
+        
+        if(!root)
+            return out;
+        
+        stack<TreeNode*> stk;
+        TreeNode* temp = root;
+        stk.push(temp);
+        
+        while(temp->left){
+            temp=temp->left;
+            stk.push(temp);
+        }
+        
+        while(!stk.empty()){
+            temp = stk.top();
+            stk.pop();
+            out.push_back(temp->val);
+            if(temp->right){
+                temp = temp->right;
+                stk.push(temp);
+            
+                while(temp->left){
+                    temp=temp->left;
+                    stk.push(temp);
+                }
+            }
+        }
+        return out;
+    }
+};
