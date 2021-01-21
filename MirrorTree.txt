@@ -1,0 +1,21 @@
+Mirror tree
+
+NOTE: Here  THERE IS A BOTTOM UP APPROACH AND WE REVERSE THE LEFT-RIGHT CHILD FIRST REVERSE LEFT THEN RIGHT THEN ROOT LIKE POST ORDER
+
+https://practice.geeksforgeeks.org/problems/mirror-tree/1#
+void mirror(Node* node) 
+{
+    if(!node)
+        return;
+    
+    mirror(node->left);
+    mirror(node->right);
+    
+    Node* temp = node->left;
+    node->left = node->right;
+    node->right = temp;
+    
+    return;
+        
+}
+
