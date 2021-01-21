@@ -1,0 +1,60 @@
+Binary Tree Postorder Traversal
+https://leetcode.com/problems/binary-tree-postorder-traversal/
+
+
+Approach 1: ECURSIVE
+class Solution {
+public:
+    void pHelper(TreeNode* root,vector<int>&out){
+        if(!root)
+            return;
+        
+        pHelper(root->left,out);
+        pHelper(root->right,out);
+        out.push_back(root->val);
+        return;
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>out;
+        pHelper(root,out);
+        return out;
+    }
+};
+
+APPROACH 2:ITERATIVE STACK OF PAIRS
+IN POST ORDER WE PRING LEFT,RIGHT,ROOT THATS WHY IN STACK TOP-BOTTOM LEFT-RIGHT-BOTTOM
+
+TIME: O(2N)
+SPACE: O(2H); BECAUSE STACK OF PAIR I.E H+H
+
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>out;
+        
+        if(!root)
+            return out;
+        
+        stack<pair<TreeNode*,int>>stk;
+        stk.push({root,0});
+        
+        while(!stk.empty()){
+            pair<TreeNode*,int> temp = stk.top();
+            stk.pop();
+            if(temp.second){
+                out.push_back(temp.first->val);
+            }
+            else{
+                temp.second = 1;
+                stk.push(temp);
+                if(temp.first->right)
+                    stk.push({temp.first->right,0});
+                if(temp.first->left)
+                    stk.push({temp.first->left,0});
+            }
+        }
+        return out;
+    }
+};
+
+APPROACH 3: ITERATIVE STACK WITHOUT PAIR
