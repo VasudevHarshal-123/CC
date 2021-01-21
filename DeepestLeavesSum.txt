@@ -1,0 +1,117 @@
+Deepest Leaves Sum
+Given a binary tree, return the sum of values of its deepest leaves.
+
+
+APPROACH 1: BFS
+
+TIME:O(N) touching every element once
+SPACE: O(MAX NODE AT SOME LEVEL); O(N)
+
+class Solution {
+public:
+    int deepestLeavesSum(TreeNode* root) {
+        
+        if(!root)
+            return NULL;
+        
+        queue<TreeNode*>q;
+        int sum;
+        int out = root->val;
+        q.push(root);
+        
+        while(!q.empty()){
+            int length = q.size();
+            sum=0;
+            for(int i=0;i<length;i++){
+                TreeNode* temp = q.front();
+                sum+=temp->val;
+                if(temp->left)
+                    q.push(temp->left);
+                if(temp->right)
+                    q.push(temp->right);
+                q.pop();
+            }
+            out = sum;
+        }
+        return out;
+    }
+};
+
+
+APPROACH 2: DFS with multiple HELPER
+
+NOTE: HERE MAXDEPTH IS COMING OUT TO BE DEPTH + ROOT SO, REDUCE IT BY 1 AND SEND;
+
+class Solution {
+public:
+    int getMaxDepth(TreeNode* root){
+        if(!root)
+            return 0;
+        
+        if(!root->left && !root->right)
+            return 1;
+        
+        int left = getMaxDepth(root->left);
+        int right = getMaxDepth(root->right);
+        
+        return max(left,right)+1;
+        
+    }
+
+    void getMaxSum(TreeNode* root, int &maxDepth, int &sum, int depth = 0){
+        if(!root)
+            return;
+        if(depth == maxDepth){
+            sum+=root->val;
+            return;
+        }
+        
+        getMaxSum(root->left,maxDepth,sum,depth+1);
+        getMaxSum(root->right,maxDepth,sum,depth+1);
+        return;
+    }
+    
+    int deepestLeavesSum(TreeNode* root) {
+        int maxDepth = getMaxDepth(root);
+        --maxDepth;
+        int sum =0;
+        getMaxSum(root,maxDepth,sum);
+        return sum;
+    }
+};
+
+Approach 3: DFS with pair
+
+class Solution {
+public:
+    pair<int,int>getMaxDepth(TreeNode* root){
+        if(!root)
+            return {0,0};
+        
+        if(!root->left && !root->right)
+            return {root->val,1};
+        
+        pair<int,int> left = getMaxDepth(root->left);
+        pair<int,int> right = getMaxDepth(root->right);
+        
+        pair<int,int>p;
+        if(left.second>right.second){
+            p.first = left.first;
+        }
+        else if(left.second<right.second){
+            p.first = right.first;
+        }
+        else{
+            p.first = left.first+right.first;
+        }
+        p.second = max(left.second,right.second)+1;
+        
+        return p;
+        
+    }
+    
+    int deepestLeavesSum(TreeNode* root) {
+        pair<int,int> maxDepth = getMaxDepth(root);
+        return maxDepth.first;
+    }
+};
