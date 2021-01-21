@@ -1,0 +1,28 @@
+Symmetric Tree
+
+APPROACH: Here we are iterating same tree from left and right
+
+NOTE: THE SECOND IF IS IMPORTANT OR ELSE CODE WILL TRY LOOKING FOR nul->RIGHT I.E RUN TIME ERROR
+
+class Solution {
+public:
+    bool isHelper(TreeNode* rootL,TreeNode* rootR){
+        if(!rootL && !rootR)
+            return true;
+        
+        if((rootL==NULL && rootR!=NULL)||(rootL!=NULL && rootR==NULL))
+            return false;
+        
+        if(rootL->val != rootR->val)
+            return false;
+        bool left = isHelper(rootL->left,rootR->right);
+        bool right = isHelper(rootL->right,rootR->left);
+        
+        return left && right;
+    }
+    bool isSymmetric(TreeNode* root) {
+        bool out = true;
+        out = isHelper(root,root);
+        return out;
+    }
+};
