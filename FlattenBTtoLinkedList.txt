@@ -1,0 +1,69 @@
+Flatten Binary Tree to Linked List
+
+APPROACH 1: TOP-DOWN;
+
+Time O(N)
+
+
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root)
+            return;
+        
+        TreeNode* tempLeft = root->left?root->left:NULL;
+        TreeNode* tempRight = root->right?root->right:NULL;
+        
+        
+        if(tempLeft){
+            root->right=tempLeft;
+            while(tempLeft->right)
+                tempLeft = tempLeft->right;
+            tempLeft->right = tempRight;
+        }
+        root->left=NULL;
+        flatten(root->right);
+        return;
+    }
+};
+
+
+APPROACH 2: 
+
+HERE WE ARE DOING BOTTOM UP APPROACH IF ELSE HANDLES ALL THE CASES OF LEFT AND RIGHT CHILD.
+
+class Solution {
+public:
+    pair<TreeNode*,TreeNode*>Helper(TreeNode* root){
+        if(!root)
+            return {NULL,NULL};
+        if(!root->left && !root->right){
+            return {root,root};
+        }
+        
+        pair<TreeNode*,TreeNode*>left = Helper(root->left);
+        pair<TreeNode*,TreeNode*>right = Helper(root->right);
+        
+        if(left.first && right.first && left.first!=right.first){
+            left.second->right = right.first;
+        }
+        
+        if(!left.first && right.first){
+            return {root,right.second};
+        }
+        else if(left.first && !right.first){
+            root->right = left.first;
+            root->left = NULL;
+            return {root,left.second};            
+        }
+        else {
+            root->right=left.first;
+            root->left=NULL;
+            return {root,right.second};
+        }
+        
+    }
+    void flatten(TreeNode* root) {
+        Helper(root);
+    }
+};
