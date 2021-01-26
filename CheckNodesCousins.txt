@@ -1,0 +1,45 @@
+Check if two Nodes are Cousins 
+https://practice.geeksforgeeks.org/problems/check-if-two-nodes-are-cousins/1#
+
+APPROACH 1: BFS - TAKE QUEUE OF PAIR TO STORE PARENT.  
+
+
+bool isCousins(Node *root, int a, int b)
+{
+    
+    if(root->data == a || root->data == b || !root)
+        return false;
+    
+    bool out = false;
+    //parent,element
+    queue<pair<int,Node*>>bfs;
+    bfs.push({0,root});
+    
+    while(!bfs.empty()){
+        int length = bfs.size();
+        pair<int,Node*>foundA,foundB;
+        for(int i=0;i<length;i++){
+            pair<int,Node*> temp = bfs.front();
+            bfs.pop();
+            if(temp.second->data==a)
+                foundA = temp;
+            
+            if(temp.second->data==b)
+                foundB = temp;
+                
+            if(temp.second->left){
+                bfs.push({temp.second->data,temp.second->left});
+            }    
+            if(temp.second->right){
+                bfs.push({temp.second->data,temp.second->right});
+            }
+        }
+        if(foundA.second && foundB.second){
+            if(foundA.first!=foundB.first)
+                out=true;
+        } else if(foundA.second || foundB.second){
+            break;
+        }
+    }
+    return out;
+}
