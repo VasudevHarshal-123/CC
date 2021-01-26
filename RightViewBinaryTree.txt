@@ -1,0 +1,31 @@
+Right View of Binary Tree
+
+Given a Binary Tree, find Right view of it. Right view of a Binary Tree is set of nodes visible when tree is viewed from right side.
+
+
+
+APPROAC 1: DFS
+
+void Helper(Node* root, vector<int>& out,int &maxLevel, int currLevel=0){
+    if(!root)
+        return;
+    
+    if(maxLevel<currLevel){
+        maxLevel = currLevel;
+        out.push_back(root->data);
+    }
+    
+    Helper(root->right,out,maxLevel,currLevel+1);
+    Helper(root->left,out,maxLevel,currLevel+1);
+    return;
+}
+
+// Should return  right view of tree
+vector<int> rightView(Node *root)
+{
+   vector<int>out;
+   int max=-1;
+   Helper(root,out,max);
+   return out;
+}
+
