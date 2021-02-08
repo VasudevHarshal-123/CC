@@ -40,6 +40,11 @@ int main()
 {
     int nodes,x,y,root = INT_MAX;
     cin>>nodes;
+    if(nodes==1){
+        cout<<0;
+        return 0;
+        
+    }    
     vector<vector<int>>adjList(nodes+1);
     
     for(int i=1;i<nodes;i++){
