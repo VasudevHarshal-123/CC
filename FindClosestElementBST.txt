@@ -1,0 +1,26 @@
+Find the Closest Element in BST 
+
+APPROACH: RETURN MIN OF EITHER LEFT,RIGHT,OR ROOT->DATA-K;
+LEFT RIGHT ARE ALREADY RETURNING DIFF 
+// Return the minimum absolute difference between any tree node and the integer K
+int minDiff(Node *root, int K)
+{
+    if(!root)
+        return INT_MAX;
+    
+    if(root->data == K)
+        return 0;
+    
+    
+    int left = INT_MAX, right = INT_MAX;
+    
+    if(root->data > K){
+        left = minDiff(root->left,K);
+    } 
+    else if(root->data < K){
+        right = minDiff(root->right,K);
+    }
+    
+    return min(abs(root->data-K),min(left,right));
+    
+}
