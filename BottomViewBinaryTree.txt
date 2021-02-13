@@ -1,0 +1,25 @@
+Bottom View of Binary Tree
+
+APPROACH: BFS AND ORDERED MAP HERE WE OVERWRITE IN MAP AND PRINT IN INORDER SO AS MOVE LEFT -VE WILL COME FIRST I.E INORDER
+vector <int> bottomView(Node *root)
+{
+   queue<pair<Node*,int>>BFS;
+   BFS.push({root,0});
+   map<int,Node*>umap;
+   pair<Node*,int>p;
+   while(!BFS.empty()){
+       p = BFS.front();
+       BFS.pop();
+       umap[p.second] = p.first;
+       if(p.first->left){
+            BFS.push({p.first->left,p.second-1});
+        }
+        if(p.first->right){
+            BFS.push({p.first->right,p.second+1});
+        }
+   }
+   vector<int>out;
+   for(auto x:umap)
+        out.push_back(x.second->data);
+   return out;
+}
