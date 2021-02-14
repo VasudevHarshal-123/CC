@@ -1,6 +1,45 @@
 Top View of Binary Tree 
 
-APPROPACH: BFS
+APPROACH: BFS UNORDERED_MAP - STORE HORIZ DIST AND ITS MIN AND MAX AND ITERATE THAT
+vector<int> topView(struct Node *root)
+{
+    int leftMax = INT_MAX,rightMax = INT_MIN;
+    unordered_map<int,struct Node*>isVisible;
+    //node, Hdist
+    queue<pair<struct Node*,int>>BFS;
+    pair<struct Node*,int>p;
+    p.first = root;
+    p.second = 0;
+    BFS.push(p);
+
+    while(!BFS.empty()){
+        p = BFS.front();
+        BFS.pop();
+        rightMax = max(rightMax,p.second);
+        leftMax = min(leftMax,p.second);
+        if(isVisible.find(p.second)==isVisible.end()){
+            isVisible[p.second] = p.first;
+        }
+            
+        if(p.first->left){
+            BFS.push({p.first->left,p.second-1});
+        }
+        if(p.first->right){
+            
+            BFS.push({p.first->right,p.second+1});
+        }
+    }
+    
+    vector<int>out;
+    for(int i = leftMax;i<=rightMax;i++){
+        out.push_back(isVisible[i]->data);
+    }
+    // cout<<endl;
+    return out;
+}
+
+
+APPROPACH: BFS: ORDERED MAP
 
 HERE ORDERED MAP IS IMPORTANT. AS THE PUTPUT IS REQUIRED IN INORDER. SO MAP STORES POSITON AS WE MOVE LEFT KEY BECOMES -VE SO IOT WILL COME 1ST SAME AS INORDER.
 
