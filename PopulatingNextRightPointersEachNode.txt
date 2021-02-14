@@ -1,0 +1,71 @@
+Populating Next Right Pointers in Each Node
+
+
+APPROACH: BFS-USING QUEUE MARK LAST ELEMENT OF QUEUE AS NULL
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(!root)
+            return NULL; 
+        
+        queue<Node*>bfs;
+        Node* out = root;
+        
+        bfs.push(root);
+        while(!bfs.empty()){
+            int len = bfs.size();
+            for(int i=0;i<len;i++){
+                Node* temp = bfs.front();
+                
+                if(temp!=bfs.back() && i!=len-1){
+                    bfs.pop();
+                    temp->next=bfs.front();
+                } else{
+                    bfs.pop();
+                }
+                if(temp->left){
+                    bfs.push(temp->left);
+                    bfs.push(temp->right);
+                }
+            }
+        }
+        return out;
+    }
+};
+
+APPROACH: DFS-TOP-DOWN PARENT CONNECTS ITS CHILDREN ALSO CONNECTS ITS RIGHT CHILD TO SIBLINGS LEFT CHILD
+
+class Solution {
+public:
+    Node* connect(Node* root) {
+       if(!root)
+            return NULL;
+       
+        if(!root->left){
+            if(!root->next)
+                root->next = NULL;
+            return root;
+        }
+       
+        //connect children
+        if(root->left){
+            root->left->next = root->right;
+        }
+        
+        //if next exist or not
+        if(root->next){
+            root->right->next = root->next->left;
+        }
+        else{
+            root->next = NULL;
+        }
+    
+        Node* left = connect(root->left);
+        Node* right = connect(root->right);
+        
+        return root;
+    }
+};
+
+
+APPROACH: BEST ITERATIVE O(1) SPACE
