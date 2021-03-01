@@ -1,0 +1,29 @@
+N meetings in one room 
+APPROACH: GREED: SORT ASC BASED ON FINISH TIME AS IT WILL FORM LONGEST CHAIN AS THE ONE ENDS 1ST HAS MAX CHANCES OF ENGAGING MOST NUMBER OF ELEMENTS.
+NOTE: THE COMPARATOR IS DIFFERENT WHEN IT COMES TO VECTOR IN PAIR WE USER > FOR MIN HEAP
+
+bool comp(const pair<int,int> &a, const pair<int,int> &b){
+    return a.second < b.second;
+}
+
+int maxMeetings(int start[], int end[], int n) {
+    vector<pair<int,int>>vp;
+    int count=1;
+    for(int i=0;i<n;i++){
+        vp.push_back(make_pair(start[i],end[i]));
+    }
+    sort(vp.begin(),vp.end(),comp);
+    pair<int,int>temp=vp[0];
+
+    // for(auto x:vp){
+    //     cout<<x.first<<"  "<<x.second<<endl;
+    // }
+    
+    for(int i=1;i<n;i++){
+        if(vp[i].first>temp.second){
+            temp=vp[i];
+            count++;
+        }
+    }
+    return count;
+}
