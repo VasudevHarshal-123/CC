@@ -1,0 +1,77 @@
+Meeting Rooms 2
+
+APPROACH: RANGE BASED APPROACH MARK THE INDEX OF START AND END(NOT END +1 TO AVOID (1,2),(2,3) TO BE 2) THE INDEX WITH MAX VALUE WILL BE NO OF ROOMS
+
+TIME:O(N)
+SPACE: O(N)
+
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        int maxElem = INT_MIN;
+        for(int i=0;i<intervals.size();i++){
+                maxElem = max(maxElem,intervals[i][1]);
+        }
+        int freq[maxElem+2];
+        memset(freq,0,sizeof(freq));
+        for(int i=0;i<intervals.size();i++){
+          freq[intervals[i][0]]++;
+          freq[intervals[i][1]]--;  
+        }
+        int out = INT_MIN;
+        for(int i=1;i<maxElem+2;i++){
+            freq[i]+=freq[i-1];
+            out = max(out,freq[i]);
+        }
+        return out; 
+    }
+};
+
+APPROACH: GREEDY : SORT BY STARTING TIME COZ IF WE SORT BY END TIME IT WILL GO N^2 AS WE HAVE TO LOOK FOR CHAINS
+		   
+		IF A CHAIN OF A MEETING IS THERE PUSH THAT IN HEAP, POP ITS PREDECCOR AND THE CHAIN CONTINUES
+		MIN-HEAP IS OF END AND AS IT IS SORTED BY START THEY PICK THE BEST.
+
+
+O(NlogN)
+O(N)
+
+
+  bool comp(const vector<int>&a, const vector<int>&b){
+    return a[0]<b[0];
+}
+
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end(),comp);
+        priority_queue<int,vector<int>,greater<int>>pq;
+        for(auto interval : intervals){
+            if(!pq.empty() && pq.top()<=interval[0]){
+                pq.pop();
+            }
+            pq.push(interval[1]);
+        }
+        return pq.size();
+    }
+};
+
+APPROACH: RANGE BASED APPROACH USING ORDERED MAP								- CLEAN CODE
+
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        map<int,int>m;
+        int out=0,c=0;
+        for(int i=0;i<intervals.size();i++){
+            m[intervals[i][0]]++;
+            m[intervals[i][1]]--;
+        }
+        
+        for(auto interval:m){
+            c+=interval.second;
+            out=max(out,c);
+        }
+        return out;
+    }
+};
