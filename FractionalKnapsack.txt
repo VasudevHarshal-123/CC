@@ -1,0 +1,30 @@
+Fractional Knapsack
+
+NOTE: THE COMPARATOR USES CROSS MULTIPLICATION AND WE DO NOT NEED AUX SPACE
+
+bool comp(const Item &a, const Item &b){
+    return (a.value*b.weight)>(b.value*a.weight);
+}
+
+// function to return fractionalweights
+class Solution
+{
+    public:
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        double profit=0;
+        sort(arr,arr+n,comp);
+        for(int i=0;i<n;i++){
+            if(W>arr[i].weight){
+                profit+=arr[i].value;
+                W-=arr[i].weight;
+            } 
+            else{
+                profit+=W*((double)arr[i].value/(double)arr[i].weight);
+                break;
+            }
+        }
+        return profit;
+    }
+        
+};
