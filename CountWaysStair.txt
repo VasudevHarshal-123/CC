@@ -1,0 +1,89 @@
+Count ways to reach the n'th stair 
+https://practice.geeksforgeeks.org/problems/count-ways-to-reach-the-nth-stair-1587115620/1#
+
+APPROACH 1: TLE: RECURSIVE: START FROM TOP STAIR FOR EVERY STAIRS EITHER ONE STEP DOWN OR TWO AND AT STEP 1 THEN CAN TAKE ONLY ONE STAEP DOWN NOT TWO
+TIME: o(2^N)
+SPACE: STACK SPACE
+class Solution{
+    public:
+    int countWays(int m){
+        if(m<=0){
+            return 1;
+        }
+    int o = countWays(m-1),t=0;				//or countWays(i+1)+countWays(i+2) 
+    if(m>1)						//if(i>m)ret 0;
+    t = countWays(m-2);
+    return o+t;
+    }
+};
+
+APPROACH 2: RECURSION + MEMOIZATION == DP (TOP BOTTOM)
+
+TIME:O(N) - AS IT WILL STEP ON A STAIRS ONCE NEXT TIME IT WILL PICK THE PATHS FROM CACHE
+
+class Solution{
+    public:
+    int helper(int m, int mem[],long long mod){
+        if(m<=0){
+            return 1;
+        }
+						//check
+        if(mem[m]!=0){
+            return mem[m];
+        }
+        
+    int o = helper(m-1,mem,mod),t=0;
+
+    if(m>1)
+    t = helper(m-2,mem,mod);
+						//update
+    mem[m] = (o+t)%mod;
+						//return
+    return mem[m];
+    }
+
+
+    int countWays(int m){
+        long long mod = 1000000007;
+        int mem[m+1];
+        memset(mem,0,sizeof(mem));
+        int out = helper(m,mem,mod);
+        return out;
+    }
+};
+
+APPROACH 3: ITERATIVE: BOTTOM-TOP; MEMOIZATION USING EXTRA SPACE
+class Solution{
+    public:
+    int countWays(int m){
+        long long mod = 1000000007;
+        int mem[m+1];
+        memset(mem,0,sizeof(mem));
+        mem[1]=1;
+        mem[2]=2;
+        for(int i=3;i<=m;i++){
+            mem[i]=(mem[i-1]+mem[i-2])%mod;
+        }
+        return mem[m];
+    }
+};
+
+APPROACH 4 - CONST SPACE
+class Solution{
+    public:
+    int countWays(int m){
+        long long mod = 1000000007;
+        if(m==1)
+            return 1;
+        if(m==2)
+            return 2;
+        int prevprev = 1,out;
+        int prev = 2;
+        for(int i=3;i<=m;i++){
+            out=(prev+prevprev)%mod;
+            prevprev=prev;
+            prev=out;
+        }
+        return out;
+    }
+};
