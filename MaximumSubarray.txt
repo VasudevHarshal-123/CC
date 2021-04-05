@@ -1,0 +1,26 @@
+Maximum Subarray
+
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+KADANE'S O(N) Solution.
+
+class Solution {
+public:
+    void helper(vector<int> &nums, int &answer, int currentSum, int index = 0){
+        if(index==nums.size())
+            return;
+        currentSum+=nums[index];
+        answer = max(answer,currentSum);
+        if(currentSum<0){
+            currentSum=0;
+        }
+        helper(nums,answer,currentSum,index+1);
+            
+    }
+    int maxSubArray(vector<int>& nums) {
+        int answer = INT_MIN;
+        int currentSum = 0;
+        helper(nums,answer,currentSum);
+        return answer;
+    }
+};
