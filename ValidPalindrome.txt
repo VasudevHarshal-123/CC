@@ -1,0 +1,50 @@
+Valid Palindrome
+
+NEW FUNCTION: isalnum()		//Returns true if alpha numeric;
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int start=0,end=s.length()-1;
+        while(start<=end){
+            if(!isalnum(s[start]))
+                start++;
+            else if(!isalnum(s[end]))
+                end--;
+            else if(tolower(s[start++])!=tolower(s[end--])){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+
+BRUTE FORCE SOLUTION WITH ASCII CODES.
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string check = "";
+        int checkI=0;
+        for(int i=0;i<s.length();i++){
+            if((s[i]>=65 && s[i]<=90)||(s[i]>=97 && s[i]<=122)||(s[i]>=48 && s[i]<=57)){
+                check+=s[i];
+                check[checkI]=tolower(check[checkI]);
+                checkI++;
+            }
+        }
+        int start = 0, end=check.length()-1;
+        while(start<=end){
+            if(check[start]!=check[end]){
+                return false;
+            }
+            else {
+                start++;
+                end--;
+            }
+        }
+        return true;
+    }
+};
