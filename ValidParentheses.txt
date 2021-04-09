@@ -1,0 +1,27 @@
+Valid Parentheses
+
+
+APPROACH: TWO POINTERS
+O(N);
+
+
+APPROACH: BRUTE FORCE: FOR EVERY ELEMENT CHECK ENTIRE STRING
+O(N^2) N=LENGTH OF STRING;
+
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) {
+        int minIdx = INT_MAX;
+        vector<int>out(s.length());				//DECLARE VECTOR OF FIX LENGTH
+        for(int i=0;i<s.length();i++){
+            for(int j=0;j<s.length();j++){
+                if(s[j]==c){
+                  minIdx = min(minIdx,abs(j-i));  
+                }
+            }
+            out[i] = minIdx;
+            minIdx = INT_MAX;					//IMP: ELSE WHEN HIT ZERO WILL CONTINUE 0 0 0 0...
+        }
+        return out;
+    }
+};
