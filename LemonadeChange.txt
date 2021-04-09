@@ -1,0 +1,40 @@
+https://leetcode.com/problems/lemonade-change/
+Lemonade Change
+
+Approach: store fives and tens cant do anything with 20 so dont store. When 20 comes try apying with 10+5 if not possible then with 5+5+5 
+WHY? 5,5,5,5,10,20,10 here if we pay for 20 with 5+5+5 left: 10 so false but if pay 20 with 10+5 left:5,5
+
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        long long int fives=0,tens=0;
+        
+        for(int i=0;i<bills.size();i++){
+            if(bills[i]==5){
+                fives++;
+            }
+            else if(bills[i]==10){
+                if(fives>0){
+                    fives--;
+                    tens++;
+                } 
+                else {
+                    return false;
+                }
+            }
+            else {
+                if(tens>0 && fives>0){
+                    tens--;
+                    fives--;
+                }
+                else if(fives>=3){
+                    fives-=3;
+                } 
+                else {
+                    return false;
+                }
+            }
+        }
+       return true;
+    }
+};
