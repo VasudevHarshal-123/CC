@@ -1,27 +1,30 @@
 Valid Parentheses
 
-
-APPROACH: TWO POINTERS
-O(N);
-
-
-APPROACH: BRUTE FORCE: FOR EVERY ELEMENT CHECK ENTIRE STRING
-O(N^2) N=LENGTH OF STRING;
+CASES: "(", ")", "{[]}"
 
 class Solution {
 public:
-    vector<int> shortestToChar(string s, char c) {
-        int minIdx = INT_MAX;
-        vector<int>out(s.length());				//DECLARE VECTOR OF FIX LENGTH
+    bool isValid(string s) {
+        stack<char>stk;
         for(int i=0;i<s.length();i++){
-            for(int j=0;j<s.length();j++){
-                if(s[j]==c){
-                  minIdx = min(minIdx,abs(j-i));  
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+                stk.push(s[i]);
+            } 
+            else{
+                if(stk.empty())				// HANDLES ")"
+                    return false;
+                if(stk.top() == '(' && s[i]==')'){
+                    stk.pop();
+                }
+                else if(stk.top() == '{' && s[i]=='}'){
+                    stk.pop();
+                }
+                else if(stk.top() == '[' && s[i]==']'){
+                    stk.pop();
                 }
             }
-            out[i] = minIdx;
-            minIdx = INT_MAX;					//IMP: ELSE WHEN HIT ZERO WILL CONTINUE 0 0 0 0...
         }
-        return out;
+        
+        return stk.empty();		// IF "(" THEN STK IS NOT EMPTY WILL RETURN FALSE
     }
 };
