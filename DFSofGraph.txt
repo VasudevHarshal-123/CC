@@ -1,0 +1,28 @@
+DFS of Graph
+
+https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1#
+
+APPROACH: WE MARK ELEMENT VISITED AND PUSH IN ANS THEN VISIT ITS CHILDREN ONE BY ONE IF THEY ARE VISITED AVOID ELSE MAKE DFS CALL. 
+
+	ALSO, TAKES CARE OF CYCLE.
+
+class Solution {
+public:
+    
+    void help(int curr, vector<int> adj[],vector<int> &out,bool vis[]){
+
+        vis[curr]=true;
+        out.push_back(curr);
+        for(auto x:adj[curr]){
+            if(!vis[x])
+                help(x,adj,out,vis);
+        }
+    }
+    
+	vector<int>dfsOfGraph(int V, vector<int> adj[]){
+	    vector<int>out;
+	    bool vis[V]={false};
+	    help(0,adj,out,vis);
+	    return out;
+	}
+};
