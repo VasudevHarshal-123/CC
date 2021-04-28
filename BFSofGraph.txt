@@ -1,0 +1,27 @@
+BFSofGraph
+
+APPROACH: FOR EVERY ELEMENT STARTING FROM 0 WE INSERT IT IN QUEUE AND MARK IT AS VISITED ONCE IT ENTERS THE QUEUE AND PUSH IN OUTPUT IN SAME ORDER THEY ENTER Q. 
+
+class Solution {
+public:
+	vector<int>bfsOfGraph(int V, vector<int> adj[]){
+	    bool vis[V] = {false};
+	    vector<int>out;
+	    queue<int>q;
+	    q.push(0);
+	    vis[0] = true;	
+	    out.push_back(0);
+	    while(!q.empty()){
+	       int temp = q.front();
+	       q.pop();
+	       for(int i=0;i<adj[temp].size();i++){
+	           if(vis[adj[temp][i]]==false){
+	               q.push(adj[temp][i]);
+	               vis[adj[temp][i]] = true;
+                    out.push_back(adj[temp][i]);
+	           }
+	       }
+	    }
+	    return out;
+	}
+};
