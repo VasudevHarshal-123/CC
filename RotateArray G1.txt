@@ -1,0 +1,53 @@
+Rotate Array : https://leetcode.com/problems/rotate-array/
+
+Given an array, rotate the array to the right by k steps, where k is non-negative.
+
+
+SOLUTION: TIME:O(N*K) ;; SPACE: O(1)    		TLE 
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int temp,last,n=nums.size();
+        while(k--){
+            last = nums[n-1];
+            for(int j=0;j<n;j++){
+                temp = nums[j];
+                nums[j] = last;
+                last = temp;
+            }
+        }
+    }
+};
+
+
+SOLUTION: TIME: O(N) SPACE:O(N) 			ACCEPTED.
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int last,n=nums.size();
+        k = k%n;				//TO AVOID FULL ROTATION
+        vector<int>temp;
+        for(int i = n-k;i<n;i++) {
+            temp.push_back(nums[i]);
+        }
+        
+        for(int i=0;i<n-k;i++) {
+            temp.push_back(nums[i]);
+        }
+        nums = temp;
+    }
+};
+
+HERE WE ARE REVERSEING FROM 0 TO N-K  AND N-K TO N SEPERATELY THEN THE ENTIRE ARRAY
+
+SOLUTION:TIME:O(N)  SPACE:O(1);				ACCEPTED
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size(); 
+        k = k%n;
+        reverse(nums.begin(),nums.begin()+(n-k));		//[START,END)
+        reverse(nums.begin()+(n-k),nums.begin()+n);
+        reverse(nums.begin(),nums.begin()+n);
+    }
+};

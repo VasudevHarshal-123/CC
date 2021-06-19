@@ -1,0 +1,32 @@
+Trapping Rain Water https://leetcode.com/problems/trapping-rain-water/
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+SOLUTION TIME:O(N) SPACE O(N);
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size(); 
+        if(!n)
+            return 0;
+        int leftMax[n],rightMax[n];
+        int rMax = INT_MIN,lMax = INT_MIN;
+        
+        for(int i=n-1;i>=0;i--) {
+            rMax = max(rMax,height[i]);
+            rightMax[i] = rMax;
+        }
+        
+         for(int i=0;i<n;i++) {
+            lMax = max(lMax,height[i]);
+            leftMax[i] = lMax;
+        }
+        int output = 0;
+        for(int i=0;i<n;i++) {
+           if(height[i]<leftMax[i] && height[i]<rightMax[i]) {
+               output += min(leftMax[i]-height[i],rightMax[i]-height[i]);
+           }
+        }
+        return output;
+    }
+};
